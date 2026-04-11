@@ -1,4 +1,1122 @@
 <!DOCTYPE html>
-  <html>
-    <body><h1>Hello World!</h1></body>
-  </html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مرقاة — استشارات أكاديمية متميزة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* =============================================
+       CSS VARIABLES
+    ============================================= */
+    :root {
+      --navy:        #0D1F3C;
+      --gold:        #C9A84C;
+      --cream:       #F5F0E8;
+      --charcoal:    #1A1A2E;
+      --gold-muted:  #E8D5A3;
+      --gold-faint:  rgba(201, 168, 76, 0.12);
+      --gold-glow:   rgba(201, 168, 76, 0.28);
+      --font-display: 'Amiri', serif;
+      --font-body:    'Tajawal', sans-serif;
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--navy);
+      color: var(--cream);
+      direction: rtl;
+      text-align: right;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* =============================================
+       SHARED LAYOUT
+    ============================================= */
+    .section-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* =============================================
+       ORNAMENTAL ELEMENTS
+    ============================================= */
+    .gold-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to left, transparent, var(--gold), transparent);
+    }
+
+    /* Diamond ornament row */
+    .ornament-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 1.6rem 0;
+    }
+    .ornament-row .line {
+      flex: 1;
+      max-width: 160px;
+      height: 1px;
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+    .ornament-row .line.flip {
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .ornament-row .diamond {
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+    .ornament-row .diamond.sm {
+      width: 4px;
+      height: 4px;
+      opacity: 0.5;
+    }
+
+    /* Section heading block */
+    .section-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    /* =============================================
+       SCROLL REVEAL
+    ============================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.85s cubic-bezier(.22,.68,0,1.2),
+                  transform 0.85s cubic-bezier(.22,.68,0,1.2);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.18s; }
+    .d3 { transition-delay: 0.28s; }
+    .d4 { transition-delay: 0.38s; }
+    .d5 { transition-delay: 0.48s; }
+
+    /* =============================================
+       ANIMATIONS
+    ============================================= */
+    @keyframes logoGlow {
+      0%, 100% {
+        text-shadow:
+          0 0 18px rgba(201,168,76,.45),
+          0 0 38px rgba(201,168,76,.22);
+      }
+      50% {
+        text-shadow:
+          0 0 28px rgba(201,168,76,.75),
+          0 0 55px rgba(201,168,76,.40),
+          0 0 80px rgba(201,168,76,.18);
+      }
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0) translateX(-50%); opacity: .9; }
+      55%       { transform: translateY(9px) translateX(-50%); opacity: .4; }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =============================================
+       HERO SECTION
+    ============================================= */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* Grain noise overlay */
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 260px 260px;
+    }
+
+    /* Radial glow behind logo */
+    .hero-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      width: 640px;
+      height: 640px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,.07) 0%, transparent 68%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.4rem;
+      animation: fadeDown .9s ease both;
+      animation-delay: .15s;
+    }
+
+    /* Thin ornamental line flanking logo */
+    .hero-line {
+      width: 220px;
+      height: 1px;
+      background: linear-gradient(to left, transparent, var(--gold), transparent);
+      position: relative;
+    }
+    .hero-line::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+    }
+
+    .hero-logo {
+      font-family: var(--font-display);
+      font-size: clamp(5.5rem, 16vw, 11rem);
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      letter-spacing: .04em;
+      animation: logoGlow 3.2s ease-in-out infinite;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1.05rem, 2.6vw, 1.55rem);
+      color: var(--gold-muted);
+      font-style: italic;
+      opacity: .88;
+      letter-spacing: .04em;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      animation: scrollBounce 2.2s ease-in-out infinite;
+    }
+    .scroll-indicator .scroll-line {
+      width: 1px;
+      height: 38px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+    .scroll-indicator svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--gold);
+      opacity: .65;
+    }
+
+    /* =============================================
+       ABOUT SECTION
+    ============================================= */
+    #about {
+      background: var(--cream);
+      padding: 100px 0;
+      color: var(--charcoal);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    /* In RTL grid: first child = right column, second child = left column */
+    /* Quote side is first (right), text side is second (left) per spec     */
+
+    .about-quote-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    /* Geometric arabesque ornament */
+    .arabesque-svg {
+      width: 96px;
+      height: 96px;
+      opacity: .85;
+    }
+
+    .about-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+      color: var(--navy);
+      text-align: center;
+      line-height: 1.9;
+      font-style: italic;
+      position: relative;
+      padding: 1.6rem 2rem;
+    }
+    .about-quote::before {
+      content: '❝';
+      font-family: serif;
+      font-size: 3.8rem;
+      color: var(--gold);
+      opacity: .35;
+      position: absolute;
+      top: -6px;
+      right: 0;
+      line-height: 1;
+    }
+    .about-quote::after {
+      content: '❞';
+      font-family: serif;
+      font-size: 3.8rem;
+      color: var(--gold);
+      opacity: .35;
+      position: absolute;
+      bottom: -14px;
+      left: 0;
+      line-height: 1;
+    }
+
+    .about-text .accent-bar {
+      width: 52px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-bottom: 1.4rem;
+    }
+
+    .about-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      color: var(--navy);
+      margin-bottom: 1.4rem;
+      line-height: 1.45;
+    }
+
+    .about-text p {
+      font-size: clamp(1rem, 1.9vw, 1.12rem);
+      color: #282836;
+      line-height: 2.1;
+    }
+
+    /* =============================================
+       EXPERT SECTION
+    ============================================= */
+    #expert {
+      background: var(--navy);
+      padding: 100px 0;
+    }
+
+    .expert-card {
+      max-width: 820px;
+      margin: 56px auto 0;
+      border: 1px solid rgba(201,168,76,.22);
+      background: linear-gradient(145deg, rgba(201,168,76,.05) 0%, rgba(13,31,60,.6) 100%);
+      padding: 3rem 3.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .expert-avatar {
+      width: 116px;
+      height: 116px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      background: linear-gradient(135deg, rgba(201,168,76,.14), rgba(201,168,76,.04));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 28px rgba(201,168,76,.18);
+    }
+    .expert-avatar span {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .expert-info h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+      color: var(--gold-muted);
+      margin-bottom: .35rem;
+    }
+
+    .expert-role {
+      font-size: .82rem;
+      color: rgba(245,240,232,.45);
+      letter-spacing: .07em;
+      margin-bottom: 2rem;
+    }
+
+    .credential-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+    .credential-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: clamp(.88rem, 1.7vw, .98rem);
+      color: var(--cream);
+      line-height: 1.65;
+    }
+    .credential-list li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .credential-years {
+      margin-top: 1.8rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid rgba(201,168,76,.18);
+      font-family: var(--font-display);
+      font-size: 1.08rem;
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    /* =============================================
+       SERVICES SECTION
+    ============================================= */
+    #services {
+      background: var(--cream);
+      padding: 100px 0;
+      color: var(--charcoal);
+    }
+
+    #services .section-eyebrow { opacity: .75; }
+    #services .section-heading { color: var(--navy); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+
+    .service-card {
+      border: 1px solid rgba(201,168,76,.28);
+      padding: 2.6rem 2rem;
+      background: rgba(255,255,255,.55);
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(201,168,76,.06), transparent);
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 22px 44px rgba(13,31,60,.13), 0 0 0 1px rgba(201,168,76,.5);
+      border-color: rgba(201,168,76,.55);
+    }
+    .service-card:hover::after { opacity: 1; }
+
+    .service-number {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      color: rgba(201,168,76,.22);
+      line-height: 1;
+      margin-bottom: .9rem;
+    }
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.05rem, 1.9vw, 1.35rem);
+      color: var(--navy);
+      margin-bottom: .9rem;
+      line-height: 1.5;
+    }
+    .service-card p {
+      font-size: .93rem;
+      color: #333345;
+      line-height: 1.85;
+    }
+
+    /* =============================================
+       PRICING SECTION
+    ============================================= */
+    #pricing {
+      background: var(--navy);
+      padding: 100px 0;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .pricing-card {
+      border: 1px solid rgba(201,168,76,.18);
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(180deg, rgba(201,168,76,.04) 0%, transparent 100%);
+    }
+
+    .pricing-card.featured {
+      border-color: rgba(201,168,76,.48);
+      transform: translateY(-14px);
+      background: linear-gradient(180deg, rgba(201,168,76,.1) 0%, rgba(201,168,76,.02) 100%);
+    }
+    .pricing-card.featured::before {
+      content: 'الأكثر طلباً';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--font-body);
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 4px 18px;
+      letter-spacing: .06em;
+      white-space: nowrap;
+    }
+
+    .pricing-size {
+      font-size: .82rem;
+      color: var(--gold-muted);
+      letter-spacing: .1em;
+      margin-bottom: 1.4rem;
+      opacity: .8;
+    }
+    .pricing-sep {
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+      opacity: .3;
+      margin: 0 auto 1.4rem;
+    }
+    .pricing-amount {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: .4rem;
+    }
+    .pricing-currency {
+      font-size: .95rem;
+      color: var(--gold-muted);
+      opacity: .8;
+    }
+    .pricing-period {
+      font-size: .78rem;
+      color: rgba(245,240,232,.38);
+      margin-top: .5rem;
+    }
+
+    .pricing-note {
+      text-align: center;
+      margin-top: 3rem;
+      font-family: var(--font-display);
+      font-size: .95rem;
+      color: rgba(245,240,232,.48);
+      font-style: italic;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.9;
+    }
+
+    /* =============================================
+       EXCLUSIVITY SECTION
+    ============================================= */
+    #exclusivity {
+      background: var(--cream);
+      padding: 100px 0;
+      text-align: center;
+      color: var(--charcoal);
+    }
+
+    .excl-divider {
+      width: 360px;
+      max-width: 90%;
+      height: 1px;
+      background: linear-gradient(to left, transparent, var(--gold), transparent);
+      margin: 0 auto;
+    }
+
+    .excl-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6.5vw, 4.8rem);
+      color: var(--navy);
+      line-height: 1.3;
+      margin: 2.8rem auto;
+      max-width: 760px;
+    }
+
+    .excl-body {
+      max-width: 660px;
+      margin: 0 auto;
+      font-size: clamp(.98rem, 1.9vw, 1.12rem);
+      color: #282836;
+      line-height: 2.2;
+    }
+    .excl-body p { margin-bottom: .9rem; }
+    .excl-body strong { color: var(--navy); font-weight: 700; }
+
+    /* =============================================
+       CONTACT SECTION
+    ============================================= */
+    #contact {
+      background: var(--navy);
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .contact-wrap {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--font-body);
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 1rem 2.6rem;
+      text-decoration: none;
+      margin: 2.8rem 0 1.6rem;
+      letter-spacing: .03em;
+      transition: background .28s, transform .2s, box-shadow .28s;
+      border: none;
+      cursor: pointer;
+    }
+    .whatsapp-btn svg {
+      width: 21px;
+      height: 21px;
+      fill: var(--navy);
+      flex-shrink: 0;
+    }
+    .whatsapp-btn:hover {
+      background: var(--gold-muted);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(201,168,76,.32);
+    }
+
+    .contact-note {
+      font-family: var(--font-display);
+      font-size: .88rem;
+      color: rgba(245,240,232,.38);
+      font-style: italic;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    footer {
+      background: var(--charcoal);
+      padding: 0 2rem 2.5rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      padding-top: 2.6rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 2.3rem;
+      color: var(--gold);
+      letter-spacing: .06em;
+      margin-bottom: .9rem;
+    }
+
+    .footer-copy {
+      font-size: .82rem;
+      color: rgba(245,240,232,.3);
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 44px;
+      }
+      .about-quote-side {
+        display: none;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+        max-width: 460px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .pricing-card.featured {
+        transform: translateY(0);
+      }
+      .expert-card {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        text-align: center;
+      }
+      .expert-avatar {
+        margin: 0 auto;
+      }
+      .credential-list li {
+        text-align: right;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .section-container { padding: 0 1.25rem; }
+      #about, #expert, #services, #pricing, #exclusivity, #contact {
+        padding-top: 72px;
+        padding-bottom: 72px;
+      }
+      .hero-logo { font-size: 5rem; }
+      .expert-card { gap: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- =============================================
+     HERO
+============================================= -->
+<section id="hero" aria-label="مرقاة — الصفحة الرئيسية">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-grain"  aria-hidden="true"></div>
+  <div class="hero-glow"   aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-line" aria-hidden="true"></div>
+    <h1 class="hero-logo" lang="ar">مرقاة</h1>
+    <div class="hero-line" aria-hidden="true"></div>
+    <p class="hero-tagline">بوابتك نحو القرار الأكاديمي الصحيح</p>
+  </div>
+
+  <div class="scroll-indicator" aria-label="تمرير للأسفل">
+    <div class="scroll-line"></div>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12 16L4.5 8.5h15z"/>
+    </svg>
+  </div>
+</section>
+
+<div class="gold-divider" aria-hidden="true"></div>
+
+<!-- =============================================
+     ABOUT
+============================================= -->
+<section id="about" aria-labelledby="about-heading">
+  <div class="section-container">
+    <div class="about-grid">
+
+      <!-- Quote side (visually RIGHT in RTL — first in DOM) -->
+      <div class="about-quote-side reveal">
+        <!-- Geometric arabesque ornament -->
+        <svg class="arabesque-svg" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="48" cy="48" r="44" stroke="#C9A84C" stroke-width=".7" opacity=".3"/>
+          <circle cx="48" cy="48" r="32" stroke="#C9A84C" stroke-width=".5" opacity=".25"/>
+          <!-- 8-pointed star outline -->
+          <polygon points="48,8 52.6,35.4 76,20 60.6,43.4 88,48 60.6,52.6 76,76 52.6,60.6 48,88 43.4,60.6 20,76 35.4,52.6 8,48 35.4,43.4 20,20 43.4,35.4"
+                   stroke="#C9A84C" stroke-width=".6" fill="none" opacity=".22"/>
+          <!-- Inner diamond -->
+          <polygon points="48,30 60,48 48,66 36,48"
+                   stroke="#C9A84C" stroke-width=".8" fill="rgba(201,168,76,.06)" opacity=".6"/>
+          <!-- Center dot -->
+          <circle cx="48" cy="48" r="3.5" fill="#C9A84C" opacity=".55"/>
+        </svg>
+
+        <blockquote class="about-quote" lang="ar">
+          التعليم أسمى استثمار —<br>والقرار الصحيح يبدأ بمرجعية موثوقة
+        </blockquote>
+      </div>
+
+      <!-- Text side (visually LEFT in RTL — second in DOM) -->
+      <div class="about-text reveal d2">
+        <div class="accent-bar" aria-hidden="true"></div>
+        <h2 id="about-heading">ما هي مرقاة؟</h2>
+        <p>
+          مرقاة هي خدمة استشارية حصرية تُقدَّم للمدارس الخاصة المتميزة في عمّان، تهدف إلى تمكين الطلاب وذويهم من اتخاذ قرارات أكاديمية مدروسة بإشراف مباشر من أعلى مرجعية في القبول الجامعي الأردني.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider" aria-hidden="true"></div>
+
+<!-- =============================================
+     EXPERT
+============================================= -->
+<section id="expert" aria-labelledby="expert-heading">
+  <div class="section-container">
+    <p class="section-eyebrow reveal">الخبير الاستشاري</p>
+    <h2 class="section-heading reveal d1" id="expert-heading">القيادة الأكاديمية</h2>
+
+    <div class="ornament-row reveal d2" aria-hidden="true">
+      <div class="line flip"></div>
+      <div class="diamond sm"></div>
+      <div class="diamond"></div>
+      <div class="diamond sm"></div>
+      <div class="line"></div>
+    </div>
+
+    <div class="expert-card reveal d2">
+      <div class="expert-avatar" role="img" aria-label="م. مهنّد الخطيب">
+        <span aria-hidden="true">م.خ</span>
+      </div>
+      <div class="expert-info">
+        <h3>م. مهنّد الخطيب</h3>
+        <p class="expert-role">المستشار الأكاديمي لمرقاة</p>
+        <ul class="credential-list" aria-label="المؤهلات والمناصب">
+          <li>مدير وحدة التنسيق الموحّد للقبول الجامعي — وزارة التعليم العالي</li>
+          <li>المتحدث الرسمي باسم الوزارة</li>
+          <li>مستشار إعلامي لوزير التعليم العالي</li>
+          <li>عضو في لجان استراتيجية وطنية متعددة</li>
+        </ul>
+        <p class="credential-years">خبرة تتجاوز ٢٠ عامًا في الإدارة والتنسيق الأكاديمي</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider" aria-hidden="true"></div>
+
+<!-- =============================================
+     SERVICES
+============================================= -->
+<section id="services" aria-labelledby="services-heading">
+  <div class="section-container">
+    <p class="section-eyebrow reveal">ما نقدمه</p>
+    <h2 class="section-heading reveal d1" id="services-heading">الخدمات الاستشارية</h2>
+
+    <div class="ornament-row reveal d2" aria-hidden="true">
+      <div class="line flip" style="background: linear-gradient(to right, transparent, var(--gold));"></div>
+      <div class="diamond sm" style="background: var(--navy); opacity:.35"></div>
+      <div class="diamond" style="background: var(--gold);"></div>
+      <div class="diamond sm" style="background: var(--navy); opacity:.35"></div>
+      <div class="line" style="background: linear-gradient(to left, transparent, var(--gold));"></div>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card reveal d1">
+        <span class="service-number" aria-hidden="true">١</span>
+        <h3>جلسات توجيه أكاديمي جماعية</h3>
+        <p>جلسات منظّمة للطلاب وأولياء الأمور داخل المدرسة، تُقدَّم بإشراف مباشر من المستشار.</p>
+      </article>
+      <article class="service-card reveal d2">
+        <span class="service-number" aria-hidden="true">٢</span>
+        <h3>ورش عمل متخصصة</h3>
+        <p>ورش تفاعلية حول القبول الجامعي والتخصصات والمسارات المهنية المتاحة في الأردن والخارج.</p>
+      </article>
+      <article class="service-card reveal d3">
+        <span class="service-number" aria-hidden="true">٣</span>
+        <h3>جلسات فردية إضافية</h3>
+        <p>تُحجز عبر المدرسة للحالات التي تحتاج توجيهًا مخصصًا وعناية فردية معمّقة.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider" aria-hidden="true"></div>
+
+<!-- =============================================
+     PRICING
+============================================= -->
+<section id="pricing" aria-labelledby="pricing-heading">
+  <div class="section-container">
+    <p class="section-eyebrow reveal">الاشتراك السنوي</p>
+    <h2 class="section-heading reveal d1" id="pricing-heading">هيكل الأسعار</h2>
+
+    <div class="ornament-row reveal d2" aria-hidden="true">
+      <div class="line flip"></div>
+      <div class="diamond sm"></div>
+      <div class="diamond"></div>
+      <div class="diamond sm"></div>
+      <div class="line"></div>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card reveal d1" role="article" aria-label="تسعير المدارس الصغيرة">
+        <p class="pricing-size">المدارس الصغيرة</p>
+        <div class="pricing-sep" aria-hidden="true"></div>
+        <p class="pricing-amount">٣٬٥٠٠</p>
+        <p class="pricing-currency">دينار أردني</p>
+        <p class="pricing-period">سنوياً</p>
+      </div>
+
+      <div class="pricing-card featured reveal d2" role="article" aria-label="تسعير المدارس المتوسطة — الأكثر طلباً">
+        <p class="pricing-size">المدارس المتوسطة</p>
+        <div class="pricing-sep" aria-hidden="true"></div>
+        <p class="pricing-amount">٤٬٥٠٠</p>
+        <p class="pricing-currency">دينار أردني</p>
+        <p class="pricing-period">سنوياً</p>
+      </div>
+
+      <div class="pricing-card reveal d3" role="article" aria-label="تسعير المدارس الكبيرة">
+        <p class="pricing-size">المدارس الكبيرة</p>
+        <div class="pricing-sep" aria-hidden="true"></div>
+        <p class="pricing-amount">٥٬٠٠٠</p>
+        <p class="pricing-currency">دينار أردني</p>
+        <p class="pricing-period">سنوياً</p>
+      </div>
+    </div>
+
+    <p class="pricing-note reveal d2">
+      يشمل السعر السنوي مجموعة جلسات محددة وفق حجم المدرسة. الجلسات الإضافية متاحة عند الطلب.
+    </p>
+  </div>
+</section>
+
+<div class="gold-divider" aria-hidden="true"></div>
+
+<!-- =============================================
+     EXCLUSIVITY
+============================================= -->
+<section id="exclusivity" aria-labelledby="excl-heading">
+  <div class="section-container">
+
+    <div class="excl-divider reveal" aria-hidden="true"></div>
+
+    <h2 class="excl-headline reveal d1" id="excl-heading">
+      لسنا للجميع —<br>نحن لمن يستحق
+    </h2>
+
+    <div class="excl-body reveal d2">
+      <p>مرقاة ليست خدمة مفتوحة للجميع، ولا يُعلَن عنها في القنوات العامة.</p>
+      <p><strong>سبع مدارس فقط</strong> تُقبَل سنوياً — بدعوة حصرية واختيار دقيق.</p>
+      <p>نحن نختار شركاءنا بعناية، لأن جودة الاستشارة تبدأ بانتقاء البيئة المناسبة لها.</p>
+      <p>إن وصلتك هذه الصفحة، فأنت على الأرجح من نبحث عنهم.</p>
+    </div>
+
+    <div class="excl-divider reveal d3" style="margin-top: 3rem;" aria-hidden="true"></div>
+
+  </div>
+</section>
+
+<div class="gold-divider" aria-hidden="true"></div>
+
+<!-- =============================================
+     CONTACT
+============================================= -->
+<section id="contact" aria-labelledby="contact-heading">
+  <div class="contact-wrap">
+    <p class="section-eyebrow reveal">تواصل معنا</p>
+    <h2 class="section-heading reveal d1" id="contact-heading">للتواصل والاستفسار</h2>
+
+    <div class="ornament-row reveal d2" aria-hidden="true">
+      <div class="line flip"></div>
+      <div class="diamond sm"></div>
+      <div class="diamond"></div>
+      <div class="diamond sm"></div>
+      <div class="line"></div>
+    </div>
+
+    <a href="https://wa.me/96200000000"
+       class="whatsapp-btn reveal d2"
+       aria-label="تواصل مع مرقاة عبر واتساب"
+       rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      تواصل عبر واتساب
+    </a>
+
+    <p class="contact-note reveal d3">التواصل حصري للمدارس المدعوّة فقط</p>
+  </div>
+</section>
+
+<!-- =============================================
+     FOOTER
+============================================= -->
+<footer>
+  <div class="gold-divider" aria-hidden="true"></div>
+  <div class="footer-inner">
+    <p class="footer-logo" aria-label="مرقاة">مرقاة</p>
+    <p class="footer-copy">© 2025 مرقاة — جميع الحقوق محفوظة</p>
+  </div>
+</footer>
+
+<!-- =============================================
+     JAVASCRIPT
+============================================= -->
+<script>
+  /* ----- GOLD PARTICLE SYSTEM ----- */
+  (function () {
+    const canvas = document.getElementById('hero-canvas');
+    const ctx    = canvas.getContext('2d');
+    let   W, H, particles = [];
+
+    function resize() {
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+
+    class Particle {
+      constructor() { this.init(true); }
+
+      init(randomY) {
+        this.x       = Math.random() * W;
+        this.y       = randomY ? Math.random() * H : H + 2;
+        this.r       = Math.random() * 1.4 + 0.25;
+        this.vx      = (Math.random() - 0.5) * 0.28;
+        this.vy      = -(Math.random() * 0.38 + 0.1);
+        this.alpha   = Math.random() * 0.48 + 0.08;
+        this.life    = 0;
+        this.maxLife = Math.random() * 220 + 90;
+      }
+
+      step() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life++;
+        if (this.life > this.maxLife || this.y < -4) this.init(false);
+      }
+
+      draw() {
+        const p = this.life / this.maxLife;
+        const a = this.alpha * (1 - Math.pow(p * 2 - 1, 2)); // bell curve fade
+        ctx.globalAlpha = Math.max(0, a);
+        ctx.fillStyle   = '#C9A84C';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      resize();
+      particles = Array.from({ length: 68 }, () => {
+        const p = new Particle();
+        p.life  = Math.floor(Math.random() * p.maxLife); // stagger start
+        return p;
+      });
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalAlpha = 1;
+      particles.forEach(p => { p.step(); p.draw(); });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', resize);
+    init();
+    loop();
+  })();
+
+  /* ----- SCROLL REVEAL (Intersection Observer) ----- */
+  (function () {
+    const els = document.querySelectorAll('.reveal');
+    const io  = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.1, rootMargin: '0px 0px -36px 0px' }
+    );
+    els.forEach(el => io.observe(el));
+  })();
+</script>
+</body>
+</html>
