@@ -1,10 +1,10 @@
-# مَرْقاة — Marqaa
+# مِرقاة — Marqaa
 
-A static landing page for **مَرْقاة**, a premium academic advisory service based in Amman, Jordan. The page is fully in Arabic (RTL) and targets principals of elite private schools.
+A static landing page for **مِرقاة**, a premium academic advisory service based in Amman, Jordan. The page is fully in Arabic (RTL) and targets principals of elite private schools.
 
 ## Overview
 
-مَرْقاة (meaning "a rung on a ladder") connects distinguished private schools with senior academic experts who have decades of experience inside Jordan's higher education system. The service is invitation-only and limited to a small number of partner schools per year.
+مِرقاة (meaning "a rung on a ladder") connects distinguished private schools with senior academic experts who have decades of experience inside Jordan's higher education system. The service is invitation-only and limited to a small number of partner schools per year.
 
 ## Stack
 
@@ -17,7 +17,7 @@ A static landing page for **مَرْقاة**, a premium academic advisory servic
 | # | Section | Background |
 |---|---------|------------|
 | 1 | Hero — animated gold particle canvas, logo, tagline | Navy |
-| 2 | About — what مَرْقاة is and the meaning of the name | Cream |
+| 2 | About — what مِرقاة is and the meaning of the name | Cream |
 | 3 | Pain Points — challenges students and families face | Navy |
 | 4 | Benefits — what students gain from the service | Cream |
 | 5 | Experts — anonymous team credentials and institutional pillars | Navy |
@@ -46,6 +46,6 @@ python -m http.server 8000
 
 ## Notes
 
-- The name مَرْقاة is always written with full Arabic diacritics (tashkeel) — never without
+- The name مِرقاة is always written with full Arabic diacritics (tashkeel) — never without
 - Expert identities are not disclosed on the page; they are revealed upon signing the partnership agreement
 - The WhatsApp link in the contact section uses a placeholder number and should be updated before deployment
