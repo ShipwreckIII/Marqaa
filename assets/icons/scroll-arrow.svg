@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" width="24" height="32">
+  <!-- Vertical line -->
+  <line x1="12" y1="0" x2="12" y2="22" stroke="#C9A84C" stroke-width="1.2" opacity="0.8"/>
+  <!-- Arrow head -->
+  <polyline points="5,16 12,24 19,16" fill="none" stroke="#C9A84C" stroke-width="1.2" stroke-linejoin="round" opacity="0.8"/>
+</svg>
