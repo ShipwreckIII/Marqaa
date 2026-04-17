@@ -3,46 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مِرقاة — استشارات أكاديمية متميزة</title>
+  <meta name="description" content="مِرْقاة — خدمة استشارية أكاديمية حصرية للمدارس الخاصة المتميزة في عمّان">
+  <title>مِرْقاة — استشارات أكاديمية متميزة</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Scheherazade+New:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
   <style>
-    /* =============================================
-       CSS VARIABLES
-    ============================================= */
+    /* ════════════════════════════════════════════
+       VARIABLES
+    ════════════════════════════════════════════ */
     :root {
-      --navy:       #0D1F3C;
-      --gold:       #C9A84C;
-      --cream:      #F5F0E8;
-      --charcoal:   #1A1A2E;
-      --gold-muted: #E8D5A3;
-      --gold-faint: rgba(201, 168, 76, 0.10);
-      --gold-glow:  rgba(201, 168, 76, 0.26);
-      --font-disp:  'Amiri', serif;
-      --font-body:  'Tajawal', sans-serif;
+      --navy:        #0D1F3C;
+      --gold:        #C9A84C;
+      --cream:       #F5F0E8;
+      --charcoal:    #1A1A2E;
+      --gold-muted:  #E8D5A3;
+      --gold-faint:  rgba(201,168,76,.10);
+      --gold-glow:   rgba(201,168,76,.28);
+      --f-disp:      'Amiri', serif;
+      --f-body:      'Tajawal', sans-serif;
+      --f-tash:      'Scheherazade New', serif;
     }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        RESET & BASE
-    ============================================= */
+    ════════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
 
     body {
-      font-family: var(--font-body);
+      font-family: var(--f-body);
       background: var(--navy);
       color: var(--cream);
       direction: rtl;
       text-align: right;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* =============================================
-       SHARED LAYOUT
-    ============================================= */
+    /* ════════════════════════════════════════════
+       LAYOUT UTILITIES
+    ════════════════════════════════════════════ */
     .wrap {
       max-width: 1140px;
       margin: 0 auto;
@@ -51,73 +59,73 @@
 
     section { padding: 100px 0; }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        SECTION HEADER BLOCK
-    ============================================= */
-    .sec-eyebrow {
-      font-family: var(--font-body);
-      font-size: .7rem;
+    ════════════════════════════════════════════ */
+    .eyebrow {
+      font-family: var(--f-body);
+      font-size: .68rem;
       font-weight: 700;
       letter-spacing: .22em;
       color: var(--gold);
       text-align: center;
       margin-bottom: .7rem;
-      opacity: .85;
+      opacity: .8;
     }
-    .sec-heading {
-      font-family: var(--font-disp);
+    .s-heading {
+      font-family: var(--f-disp);
       font-size: clamp(1.9rem, 4vw, 2.9rem);
       text-align: center;
-      line-height: 1.35;
+      line-height: 1.38;
     }
-    .sec-heading.on-cream { color: var(--navy); }
+    .s-heading.dark { color: var(--navy); }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        ORNAMENTAL ELEMENTS
-    ============================================= */
-    .gold-rule {
+    ════════════════════════════════════════════ */
+
+    /* Full-width gradient rule */
+    .g-rule {
       width: 100%;
       height: 1px;
       background: linear-gradient(to left, transparent, var(--gold), transparent);
+      flex-shrink: 0;
     }
 
-    /* Diamond + line ornament row */
+    /* Centered diamond-and-line row */
     .orn {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      margin: 1.6rem 0;
+      gap: 11px;
+      margin: 1.7rem 0;
     }
-    .orn .ln {
-      flex: 1;
-      max-width: 140px;
-      height: 1px;
-    }
-    .orn .ln-r { background: linear-gradient(to left,  transparent, var(--gold)); }
-    .orn .ln-l { background: linear-gradient(to right, transparent, var(--gold)); }
-    .orn .dm {
+    .orn .ol { flex: 1; max-width: 130px; height: 1px; }
+    .orn .ol-r { background: linear-gradient(to left,  transparent, var(--gold)); }
+    .orn .ol-l { background: linear-gradient(to right, transparent, var(--gold)); }
+    .orn .od  {
       width: 7px; height: 7px;
       background: var(--gold);
       transform: rotate(45deg);
       flex-shrink: 0;
     }
-    .orn .dm.sm { width: 4px; height: 4px; opacity: .45; }
+    .orn .od.sm { width: 4px; height: 4px; opacity: .42; }
 
-    /* On-cream ornament */
-    .orn.cream .dm    { background: var(--navy); }
-    .orn.cream .dm.sm { background: var(--navy); }
-    .orn.cream .ln-r  { background: linear-gradient(to left,  transparent, var(--navy)); }
-    .orn.cream .ln-l  { background: linear-gradient(to right, transparent, var(--navy)); }
+    /* Cream variant */
+    .orn.c .od    { background: rgba(13,31,60,.55); }
+    .orn.c .od.sm { background: rgba(13,31,60,.35); }
+    .orn.c .ol-r  { background: linear-gradient(to left,  transparent, rgba(13,31,60,.4)); }
+    .orn.c .ol-l  { background: linear-gradient(to right, transparent, rgba(13,31,60,.4)); }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        SCROLL REVEAL
-    ============================================= */
+    ════════════════════════════════════════════ */
     .rv {
       opacity: 0;
-      transform: translateY(34px);
-      transition: opacity .82s cubic-bezier(.22,.68,0,1.15),
-                  transform .82s cubic-bezier(.22,.68,0,1.15);
+      transform: translateY(32px);
+      transition:
+        opacity  .84s cubic-bezier(.22,.68,0,1.12),
+        transform .84s cubic-bezier(.22,.68,0,1.12);
     }
     .rv.on { opacity: 1; transform: translateY(0); }
     .d1 { transition-delay: .08s; }
@@ -125,34 +133,36 @@
     .d3 { transition-delay: .28s; }
     .d4 { transition-delay: .38s; }
 
-    /* =============================================
-       ANIMATIONS
-    ============================================= */
+    /* ════════════════════════════════════════════
+       KEYFRAMES
+    ════════════════════════════════════════════ */
     @keyframes logoGlow {
-      0%,100% {
+      0%, 100% {
         text-shadow:
-          0 0 18px rgba(201,168,76,.45),
+          0 0 18px rgba(201,168,76,.48),
           0 0 40px rgba(201,168,76,.20);
       }
       50% {
         text-shadow:
-          0 0 30px rgba(201,168,76,.80),
-          0 0 60px rgba(201,168,76,.42),
-          0 0 88px rgba(201,168,76,.18);
+          0 0 30px rgba(201,168,76,.82),
+          0 0 60px rgba(201,168,76,.44),
+          0 0 90px rgba(201,168,76,.18);
       }
     }
-    @keyframes arrowBounce {
-      0%,100% { transform: translate(-50%, 0);   opacity: .85; }
-      55%      { transform: translate(-50%, 9px); opacity: .35; }
+
+    @keyframes arrowDrop {
+      0%, 100% { transform: translate(-50%, 0);    opacity: .85; }
+      55%       { transform: translate(-50%, 9px);  opacity: .30; }
     }
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-16px); }
+
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(-18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        ① HERO
-    ============================================= */
+    ════════════════════════════════════════════ */
     #hero {
       position: relative;
       min-height: 100vh;
@@ -165,36 +175,41 @@
       padding: 0;
     }
 
+    /* Particle canvas */
     #hero-canvas {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       z-index: 0;
     }
+
+    /* Grain texture */
     .hero-grain {
       position: absolute; inset: 0; z-index: 1;
-      pointer-events: none; opacity: .036;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none; opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23g)'/%3E%3C/svg%3E");
       background-size: 260px;
     }
+
+    /* Radial glow */
     .hero-glow {
-      position: absolute;
+      position: absolute; z-index: 1; pointer-events: none;
       top: 50%; left: 50%;
       transform: translate(-50%, -56%);
-      width: 660px; height: 660px;
+      width: 680px; height: 680px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(201,168,76,.07) 0%, transparent 68%);
-      z-index: 1; pointer-events: none;
     }
 
+    /* Content wrapper */
     .hero-content {
       position: relative; z-index: 2;
       text-align: center;
       display: flex; flex-direction: column;
       align-items: center; gap: 1.3rem;
-      animation: fadeDown .95s ease both;
-      animation-delay: .12s;
-      overflow: visible;
+      animation: heroIn .95s ease both .12s;
     }
+
+    /* Thin ornamental lines flanking logo */
     .hero-line {
       width: 210px; height: 1px;
       background: linear-gradient(to left, transparent, var(--gold), transparent);
@@ -203,48 +218,54 @@
     .hero-line::before {
       content: '';
       position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%,-50%) rotate(45deg);
+      transform: translate(-50%, -50%) rotate(45deg);
       width: 5px; height: 5px;
       background: var(--gold);
     }
+
+    /* Logo */
     .hero-logo {
-      font-family: var(--font-disp);
+      font-family: var(--f-disp);
       font-size: clamp(5.5rem, 16vw, 11rem);
       font-weight: 700;
       color: var(--gold);
-      line-height: 1;
+      line-height: 1.1;
       letter-spacing: .04em;
-      animation: logoGlow 3.3s ease-in-out infinite;
-      overflow: visible;
-      width: max-content;
       white-space: nowrap;
+      width: auto;
+      overflow: visible;
+      animation: logoGlow 3.4s ease-in-out infinite;
     }
+
+    /* Tagline */
     .hero-tagline {
-      font-family: var(--font-disp);
+      font-family: var(--f-tash);
       font-size: clamp(1rem, 2.5vw, 1.5rem);
       color: var(--gold-muted);
       font-style: italic;
       opacity: .88;
       letter-spacing: .04em;
+      font-feature-settings: "calt" 1, "clig" 1;
+      text-rendering: optimizeLegibility;
     }
 
     /* Scroll indicator */
     .scroll-ind {
-      position: absolute; bottom: 2.4rem; left: 50%;
+      position: absolute; bottom: 2.5rem; left: 50%;
       transform: translateX(-50%);
       z-index: 2;
       display: flex; flex-direction: column; align-items: center; gap: 4px;
-      animation: arrowBounce 2.3s ease-in-out infinite;
+      animation: arrowDrop 2.3s ease-in-out infinite;
     }
-    .scroll-ind .si-line {
+    .scroll-ind .si-stem {
       width: 1px; height: 38px;
       background: linear-gradient(to bottom, var(--gold), transparent);
     }
-    .scroll-ind svg { width: 14px; height: 14px; fill: var(--gold); opacity: .62; }
+    .scroll-ind svg { width: 14px; height: 14px; fill: var(--gold); opacity: .6; }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        ② ABOUT
-    ============================================= */
+    ════════════════════════════════════════════ */
     #about { background: var(--cream); color: var(--charcoal); }
 
     .about-grid {
@@ -252,163 +273,151 @@
       grid-template-columns: 1fr 1fr;
       gap: 72px;
       align-items: center;
+      margin-top: 3rem;
     }
 
-    /* Text on RIGHT (first in DOM = right in RTL) */
+    /* Text — first in DOM = right column in RTL */
     .about-text .accent-bar {
-      width: 48px; height: 3px;
-      background: var(--gold);
-      border-radius: 2px;
+      width: 50px; height: 3px;
+      background: var(--gold); border-radius: 2px;
       margin-bottom: 1.4rem;
     }
     .about-text h2 {
-      font-family: var(--font-disp);
-      font-size: clamp(1.65rem, 3.4vw, 2.4rem);
+      font-family: var(--f-disp);
+      font-size: clamp(1.6rem, 3.2vw, 2.3rem);
       color: var(--navy);
-      margin-bottom: 1.5rem;
-      line-height: 1.45;
+      margin-bottom: 1.4rem;
+      line-height: 1.48;
     }
     .about-text p {
       font-size: clamp(.97rem, 1.85vw, 1.1rem);
-      color: #282836;
+      color: #282838;
       line-height: 2.1;
       margin-bottom: 1.1rem;
     }
     .about-text p:last-child { margin-bottom: 0; }
 
-    /* Illustration on LEFT (second in DOM = left in RTL) */
+    /* Illustration — second in DOM = left column in RTL */
     .about-illus {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 2rem;
     }
-    .about-illus svg { width: 110px; opacity: .88; }
+    .about-illus svg.ladder { width: 100px; }
 
     .about-quote {
-      font-family: var(--font-disp);
-      font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+      font-family: var(--f-disp);
+      font-size: clamp(1.2rem, 2.3vw, 1.65rem);
       color: var(--navy);
       text-align: center;
-      line-height: 1.95;
+      line-height: 2;
       font-style: italic;
       position: relative;
       padding: 1.4rem 1.8rem;
     }
     .about-quote::before {
       content: '❝';
-      font-family: serif; font-size: 3.5rem;
-      color: var(--gold); opacity: .32;
-      position: absolute; top: -4px; right: 2px;
-      line-height: 1;
+      font-family: serif; font-size: 3.4rem;
+      color: var(--gold); opacity: .3;
+      position: absolute; top: -4px; right: 0; line-height: 1;
     }
     .about-quote::after {
       content: '❞';
-      font-family: serif; font-size: 3.5rem;
-      color: var(--gold); opacity: .32;
-      position: absolute; bottom: -12px; left: 2px;
-      line-height: 1;
+      font-family: serif; font-size: 3.4rem;
+      color: var(--gold); opacity: .3;
+      position: absolute; bottom: -12px; left: 0; line-height: 1;
     }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        ③ PAIN POINTS
-    ============================================= */
+    ════════════════════════════════════════════ */
     #pain { background: var(--navy); }
 
     .pain-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
+      gap: 22px;
       margin-top: 52px;
     }
 
     .pain-card {
-      border: 1px solid rgba(201,168,76,.2);
+      border: 1px solid rgba(201,168,76,.18);
       padding: 2.2rem;
-      background: linear-gradient(145deg, rgba(201,168,76,.04) 0%, transparent 100%);
-      position: relative;
-      transition: border-color .3s, box-shadow .3s, transform .3s;
+      background: linear-gradient(145deg, rgba(201,168,76,.04), transparent);
+      transition: border-color .3s, transform .3s, box-shadow .3s;
     }
     .pain-card:hover {
       border-color: rgba(201,168,76,.48);
-      box-shadow: 0 16px 36px rgba(0,0,0,.18), 0 0 0 1px rgba(201,168,76,.22);
-      transform: translateY(-4px);
+      transform: translateY(-5px);
+      box-shadow: 0 18px 38px rgba(0,0,0,.2), 0 0 0 1px rgba(201,168,76,.2);
     }
     .pain-num {
       display: block;
-      font-family: var(--font-disp);
-      font-size: 2.6rem;
-      color: rgba(201,168,76,.2);
-      line-height: 1;
-      margin-bottom: .7rem;
+      font-family: var(--f-disp);
+      font-size: 2.7rem;
+      color: rgba(201,168,76,.18);
+      line-height: 1; margin-bottom: .7rem;
     }
     .pain-card h3 {
-      font-family: var(--font-disp);
-      font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+      font-family: var(--f-disp);
+      font-size: clamp(1.05rem, 1.9vw, 1.28rem);
       color: var(--gold-muted);
-      line-height: 1.5;
-      margin-bottom: .7rem;
+      line-height: 1.5; margin-bottom: .7rem;
     }
     .pain-card p {
       font-size: .9rem;
-      color: rgba(245,240,232,.58);
-      line-height: 1.8;
+      color: rgba(245,240,232,.55);
+      line-height: 1.82;
     }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        ④ BENEFITS
-    ============================================= */
+    ════════════════════════════════════════════ */
     #benefits { background: var(--cream); color: var(--charcoal); }
 
-    .benefits-grid {
+    .ben-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 40px;
-      margin-top: 52px;
+      margin-top: 3rem;
     }
 
-    .benefit-col {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
+    .ben-col {
+      display: flex; flex-direction: column;
+      align-items: flex-start; gap: 1rem;
     }
-    .benefit-icon {
-      width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
+    .ben-icon {
+      width: 46px; height: 46px;
       border: 1px solid rgba(201,168,76,.35);
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .benefit-icon svg { width: 24px; height: 24px; fill: var(--gold); }
+    .ben-icon svg { width: 22px; height: 22px; fill: var(--gold); }
 
-    .benefit-col h3 {
-      font-family: var(--font-disp);
-      font-size: clamp(1.1rem, 2vw, 1.35rem);
-      color: var(--navy);
-      line-height: 1.4;
+    .ben-col h3 {
+      font-family: var(--f-disp);
+      font-size: clamp(1.08rem, 2vw, 1.32rem);
+      color: var(--navy); line-height: 1.42;
     }
-    .benefit-col p {
-      font-size: .94rem;
-      color: #333345;
-      line-height: 1.85;
+    .ben-col p {
+      font-size: .93rem;
+      color: #333346; line-height: 1.88;
     }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        ⑤ EXPERTS
-    ============================================= */
+    ════════════════════════════════════════════ */
     #experts { background: var(--navy); }
 
     .experts-intro {
-      max-width: 720px;
+      max-width: 700px;
       margin: 0 auto 3.5rem;
       text-align: center;
-      font-size: clamp(.97rem, 1.85vw, 1.1rem);
-      color: rgba(245,240,232,.72);
-      line-height: 2;
+      font-size: clamp(.97rem, 1.85vw, 1.08rem);
+      color: rgba(245,240,232,.68);
+      line-height: 2.05;
     }
 
-    .pillars-grid {
+    .pillars {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
@@ -416,64 +425,61 @@
     }
 
     .pillar {
-      border: 1px solid rgba(201,168,76,.18);
-      padding: 2.6rem 2rem;
+      border: 1px solid rgba(201,168,76,.17);
+      padding: 2.6rem 1.8rem;
       text-align: center;
-      background: linear-gradient(180deg, rgba(201,168,76,.05) 0%, transparent 100%);
-      position: relative;
+      background: linear-gradient(180deg, rgba(201,168,76,.05), transparent);
       transition: border-color .3s;
     }
     .pillar:hover { border-color: rgba(201,168,76,.42); }
 
-    .pillar-icon {
-      width: 42px; height: 42px;
-      margin: 0 auto 1.3rem;
+    .pillar-ico {
+      width: 40px; height: 40px;
+      margin: 0 auto 1.2rem;
     }
-    .pillar-icon svg { width: 100%; height: 100%; fill: var(--gold); opacity: .75; }
+    .pillar-ico svg { width: 100%; height: 100%; fill: var(--gold); opacity: .72; }
 
     .pillar h3 {
-      font-family: var(--font-disp);
+      font-family: var(--f-disp);
       font-size: clamp(1rem, 1.8vw, 1.2rem);
       color: var(--gold-muted);
-      line-height: 1.5;
-      margin-bottom: .7rem;
+      line-height: 1.5; margin-bottom: .7rem;
     }
     .pillar p {
       font-size: .87rem;
-      color: rgba(245,240,232,.52);
-      line-height: 1.75;
+      color: rgba(245,240,232,.5);
+      line-height: 1.76;
     }
 
-    .expert-disclosure {
+    .expert-disc {
       text-align: center;
-      font-family: var(--font-disp);
-      font-size: .88rem;
-      color: rgba(245,240,232,.35);
+      font-family: var(--f-disp);
+      font-size: .87rem;
+      color: rgba(245,240,232,.32);
       font-style: italic;
-      border-top: 1px solid rgba(201,168,76,.12);
+      border-top: 1px solid rgba(201,168,76,.1);
       padding-top: 1.8rem;
-      max-width: 540px;
+      max-width: 520px;
       margin: 0 auto;
     }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        ⑥ SERVICES
-    ============================================= */
+    ════════════════════════════════════════════ */
     #services { background: var(--cream); color: var(--charcoal); }
 
-    .services-grid {
+    .svc-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
+      gap: 26px;
       margin-top: 52px;
     }
 
     .svc-card {
-      border: 1px solid rgba(201,168,76,.28);
+      border: 1px solid rgba(201,168,76,.27);
       padding: 2.6rem 2rem;
-      background: rgba(255,255,255,.5);
-      position: relative;
-      overflow: hidden;
+      background: rgba(255,255,255,.52);
+      position: relative; overflow: hidden;
       transition: transform .3s, box-shadow .3s, border-color .3s;
     }
     .svc-card::after {
@@ -484,38 +490,34 @@
     }
     .svc-card:hover {
       transform: translateY(-7px);
-      box-shadow: 0 22px 44px rgba(13,31,60,.13),
-                  0 0 0 1px rgba(201,168,76,.5);
+      box-shadow: 0 22px 44px rgba(13,31,60,.12), 0 0 0 1px rgba(201,168,76,.5);
       border-color: rgba(201,168,76,.55);
     }
     .svc-card:hover::after { opacity: 1; }
 
     .svc-tag {
       display: inline-block;
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .15em;
+      font-size: .68rem; font-weight: 700;
+      letter-spacing: .16em;
       color: var(--gold);
-      border: 1px solid rgba(201,168,76,.3);
+      border: 1px solid rgba(201,168,76,.28);
       padding: 3px 10px;
       margin-bottom: 1.1rem;
     }
     .svc-card h3 {
-      font-family: var(--font-disp);
-      font-size: clamp(1.05rem, 1.9vw, 1.35rem);
+      font-family: var(--f-disp);
+      font-size: clamp(1.05rem, 1.9vw, 1.32rem);
       color: var(--navy);
-      margin-bottom: .9rem;
-      line-height: 1.5;
+      margin-bottom: .9rem; line-height: 1.5;
     }
     .svc-card p {
       font-size: .93rem;
-      color: #333345;
-      line-height: 1.85;
+      color: #333346; line-height: 1.86;
     }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        ⑦ EXCLUSIVITY
-    ============================================= */
+    ════════════════════════════════════════════ */
     #exclusivity { background: var(--navy); text-align: center; }
 
     .excl-rule {
@@ -525,13 +527,13 @@
     }
 
     .excl-headline {
-      font-family: 'Scheherazade New', serif;
+      font-family: var(--f-tash);
       font-size: clamp(2rem, 5vw, 4rem);
       color: #C9A84C;
       line-height: 1.3;
-      margin: 2.8rem auto;
-      max-width: 780px;
       white-space: nowrap;
+      margin: 2.8rem auto;
+      max-width: 100%;
       font-feature-settings: "calt" 1, "clig" 1;
       text-rendering: optimizeLegibility;
     }
@@ -539,34 +541,35 @@
     .excl-body {
       max-width: 640px;
       margin: 0 auto;
-      font-size: clamp(.97rem, 1.85vw, 1.1rem);
-      color: rgba(245,240,232,.7);
+      font-size: clamp(.97rem, 1.85vw, 1.08rem);
+      color: rgba(245,240,232,.68);
       line-height: 2.2;
     }
     .excl-body p { margin-bottom: .9rem; }
     .excl-body p:last-child { margin-bottom: 0; }
     .excl-body strong { color: var(--gold-muted); font-weight: 700; }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        ⑧ CONTACT
-    ============================================= */
-    #contact { background: var(--charcoal); text-align: center; }
+    ════════════════════════════════════════════ */
+    #contact { background: var(--cream); color: var(--charcoal); text-align: center; }
 
-    .contact-wrap {
-      max-width: 540px;
+    .contact-inner {
+      max-width: 520px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
+    #contact .s-heading { color: var(--navy); }
+    #contact .eyebrow   { color: rgba(13,31,60,.55); }
+
     .wa-btn {
       display: inline-flex;
-      align-items: center;
-      gap: 11px;
+      align-items: center; gap: 11px;
       background: var(--gold);
       color: var(--navy);
-      font-family: var(--font-body);
-      font-size: 1.08rem;
-      font-weight: 700;
+      font-family: var(--f-body);
+      font-size: 1.08rem; font-weight: 700;
       padding: 1rem 2.6rem;
       text-decoration: none;
       margin: 2.8rem 0 1.6rem;
@@ -577,124 +580,128 @@
     .wa-btn:hover {
       background: var(--gold-muted);
       transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(201,168,76,.3);
+      box-shadow: 0 10px 30px rgba(201,168,76,.28);
     }
 
     .contact-note {
-      font-family: var(--font-disp);
+      font-family: var(--f-disp);
       font-size: .88rem;
-      color: rgba(245,240,232,.35);
+      color: rgba(13,31,60,.38);
       font-style: italic;
     }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        ⑨ FOOTER
-    ============================================= */
+    ════════════════════════════════════════════ */
     footer {
       background: var(--charcoal);
-      padding: 0 2rem 2.6rem;
       text-align: center;
-      border-top: 1px solid rgba(201,168,76,.08);
+      padding-bottom: 2.6rem;
     }
-
     .footer-inner { padding-top: 2.5rem; }
+
     .footer-logo {
-      font-family: var(--font-disp);
+      font-family: var(--f-disp);
       font-size: 2.3rem;
       color: var(--gold);
       letter-spacing: .06em;
       margin-bottom: .85rem;
-      animation: logoGlow 3.3s ease-in-out infinite;
+      animation: logoGlow 3.4s ease-in-out infinite;
     }
-    .footer-copy { font-size: .8rem; color: rgba(245,240,232,.28); }
+    .footer-copy {
+      font-size: .8rem;
+      color: rgba(245,240,232,.28);
+    }
 
-    /* =============================================
+    /* ════════════════════════════════════════════
        RESPONSIVE
-    ============================================= */
+    ════════════════════════════════════════════ */
     @media (max-width: 960px) {
-      .about-grid       { grid-template-columns: 1fr; gap: 44px; }
-      .about-illus      { display: none; }
-      .benefits-grid    { grid-template-columns: 1fr; max-width: 460px; margin-left: auto; margin-right: auto; }
-      .pillars-grid     { grid-template-columns: 1fr; }
-      .pillar           { border-bottom: none; }
-      .pillar:last-child{ border-bottom: 1px solid rgba(201,168,76,.18); }
-      .services-grid    { grid-template-columns: 1fr; max-width: 460px; margin-left: auto; margin-right: auto; }
-      .pain-grid        { grid-template-columns: 1fr; max-width: 460px; margin-left: auto; margin-right: auto; }
+      .about-grid     { grid-template-columns: 1fr; gap: 44px; }
+      .about-illus    { display: none; }
+      .ben-grid       { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+      .ben-col        { align-items: flex-start; }
+      .pillars        { grid-template-columns: 1fr; gap: 0; }
+      .pillar         { border-bottom: none; }
+      .pillar:last-child { border-bottom: 1px solid rgba(201,168,76,.17); }
+      .svc-grid       { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+      .pain-grid      { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+      .excl-headline  { white-space: normal; font-size: clamp(1.5rem, 5vw, 2.5rem); }
     }
 
     @media (max-width: 600px) {
-      .wrap { padding: 0 1.25rem; }
-      section { padding: 72px 0; }
-      .hero-logo { font-size: 5rem; }
+      .wrap         { padding: 0 1.25rem; }
+      section       { padding: 72px 0; }
+      .hero-logo    { font-size: 4.5rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- ① HERO ============================================= -->
-<section id="hero" aria-label="مِرقاة — الصفحة الرئيسية">
+<!-- ════════════════════════════════════════════
+     ① HERO
+════════════════════════════════════════════ -->
+<section id="hero" aria-label="مِرْقاة — الصفحة الرئيسية">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
-  <div class="hero-grain"  aria-hidden="true"></div>
-  <div class="hero-glow"   aria-hidden="true"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-glow"  aria-hidden="true"></div>
 
   <div class="hero-content">
     <div class="hero-line" aria-hidden="true"></div>
-    <h1 class="hero-logo">مِرقاة</h1>
+    <h1 class="hero-logo" lang="ar">مِرْقاة</h1>
     <div class="hero-line" aria-hidden="true"></div>
-    <p class="hero-tagline">بَوَّابَتُكَ نَحْوَ القَرَارِ الأَكَادِيمِيِّ الصَّحِيح</p>
+    <p class="hero-tagline" lang="ar">بَوَّابَتُكَ نَحْوَ القَرَارِ الأَكَادِيمِيِّ الصَّحِيح</p>
   </div>
 
   <div class="scroll-ind" aria-label="تمرير للأسفل">
-    <div class="si-line"></div>
+    <div class="si-stem"></div>
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16L4 8h16z"/></svg>
   </div>
 </section>
 
-<div class="gold-rule" aria-hidden="true"></div>
+<div class="g-rule" aria-hidden="true"></div>
 
-<!-- ② ABOUT ============================================= -->
+<!-- ════════════════════════════════════════════
+     ② ABOUT
+════════════════════════════════════════════ -->
 <section id="about" aria-labelledby="about-h">
   <div class="wrap">
-
-    <!-- Header -->
-    <p class="sec-eyebrow rv">تعرّف علينا</p>
-    <h2 class="sec-heading on-cream rv d1" id="about-h">ما هي مِرقاة؟</h2>
-    <div class="orn cream rv d2" aria-hidden="true">
-      <div class="ln ln-r"></div><div class="dm sm"></div><div class="dm"></div><div class="dm sm"></div><div class="ln ln-l"></div>
+    <p class="eyebrow rv">تعرّف علينا</p>
+    <h2 class="s-heading dark rv d1" id="about-h">ما هي مِرْقاة؟</h2>
+    <div class="orn c rv d2" aria-hidden="true">
+      <div class="ol ol-r"></div>
+      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
+      <div class="ol ol-l"></div>
     </div>
 
-    <div class="about-grid" style="margin-top: 3rem;">
+    <div class="about-grid">
 
-      <!-- Text — RIGHT column (first in RTL DOM) -->
+      <!-- Text — RIGHT (first in RTL DOM) -->
       <div class="about-text rv d1">
         <div class="accent-bar" aria-hidden="true"></div>
-        <h2 style="font-family:var(--font-disp);font-size:clamp(1.5rem,2.8vw,2rem);color:var(--navy);margin-bottom:1.4rem;line-height:1.45;visibility:hidden;height:0;overflow:hidden;" aria-hidden="true">placeholder</h2>
-        <p>مِرقاة هي خدمة استشارية أكاديمية حصرية، تُقدَّم للمدارس الخاصة المتميزة في عمّان.</p>
-        <p>تعمل مِرقاة على تجسير الفجوة بين الطالب وقراره الأكاديمي، من خلال جلسات توجيه متخصصة يقدّمها خبراء أكاديميون بخبرات موسّعة في منظومة التعليم العالي الأردني.</p>
-        <p>اسم مِرقاة مستوحى من معنى "الدرجة" أو "السُّلَّم" — إشارةً إلى أن كل خطوة في مسيرة الطالب هي درجة نحو الأعلى، ودورنا أن نكون تلك الدرجة الثابتة التي يرتكز عليها.</p>
+        <h2 aria-hidden="true" style="display:none">placeholder</h2>
+        <p>مِرْقاة هي خدمة استشارية أكاديمية حصرية، تُقدَّم للمدارس الخاصة المتميزة في عمّان.</p>
+        <p>تعمل مِرْقاة على تجسير الفجوة بين الطالب وقراره الأكاديمي، من خلال جلسات توجيه متخصصة يقدّمها خبراء أكاديميون بخبرات موسّعة في منظومة التعليم العالي الأردني.</p>
+        <p>اسم مِرْقاة مستوحى من معنى "الدرجة" أو "السُّلَّم" — إشارةً إلى أن كل خطوة في مسيرة الطالب هي درجة نحو الأعلى، ودورنا أن نكون تلك الدرجة الثابتة التي يرتكز عليها.</p>
       </div>
 
-      <!-- Illustration — LEFT column (second in RTL DOM) -->
+      <!-- Illustration — LEFT (second in RTL DOM) -->
       <div class="about-illus rv d3">
-        <!-- Ladder / ascent motif -->
-        <svg viewBox="0 0 90 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- Vertical rails -->
-          <line x1="20" y1="10" x2="20" y2="110" stroke="#C9A84C" stroke-width=".8" opacity=".4"/>
-          <line x1="70" y1="10" x2="70" y2="110" stroke="#C9A84C" stroke-width=".8" opacity=".4"/>
-          <!-- Rungs — each one is مِرقاة -->
-          <line x1="20" y1="25"  x2="70" y2="25"  stroke="#C9A84C" stroke-width="1.8" opacity=".9"/>
-          <line x1="20" y1="45"  x2="70" y2="45"  stroke="#C9A84C" stroke-width="1.5" opacity=".75"/>
-          <line x1="20" y1="65"  x2="70" y2="65"  stroke="#C9A84C" stroke-width="1.2" opacity=".55"/>
-          <line x1="20" y1="85"  x2="70" y2="85"  stroke="#C9A84C" stroke-width=".9"  opacity=".38"/>
-          <line x1="20" y1="105" x2="70" y2="105" stroke="#C9A84C" stroke-width=".7"  opacity=".24"/>
-          <!-- Ascending arrow / star at top -->
-          <polygon points="45,2 48,12 58,12 50,18 53,28 45,22 37,28 40,18 32,12 42,12"
-                   fill="#C9A84C" opacity=".55"/>
-          <!-- Outer frame diamonds -->
-          <rect x="17" y="7"   width="6" height="6" transform="rotate(45 20 10)" fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".4"/>
-          <rect x="67" y="7"   width="6" height="6" transform="rotate(45 70 10)" fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".4"/>
-          <rect x="17" y="107" width="6" height="6" transform="rotate(45 20 110)" fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".4"/>
-          <rect x="67" y="107" width="6" height="6" transform="rotate(45 70 110)" fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".4"/>
+        <!-- Ladder motif representing مِرْقاة -->
+        <svg class="ladder" viewBox="0 0 90 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="20" y1="10" x2="20" y2="110" stroke="#C9A84C" stroke-width=".75" opacity=".38"/>
+          <line x1="70" y1="10" x2="70" y2="110" stroke="#C9A84C" stroke-width=".75" opacity=".38"/>
+          <line x1="20" y1="24"  x2="70" y2="24"  stroke="#C9A84C" stroke-width="1.8" opacity=".92"/>
+          <line x1="20" y1="44"  x2="70" y2="44"  stroke="#C9A84C" stroke-width="1.4" opacity=".72"/>
+          <line x1="20" y1="64"  x2="70" y2="64"  stroke="#C9A84C" stroke-width="1.1" opacity=".52"/>
+          <line x1="20" y1="84"  x2="70" y2="84"  stroke="#C9A84C" stroke-width=".8"  opacity=".35"/>
+          <line x1="20" y1="104" x2="70" y2="104" stroke="#C9A84C" stroke-width=".6"  opacity=".20"/>
+          <polygon points="45,2 49,13 60,13 51,20 55,31 45,24 35,31 39,20 30,13 41,13"
+                   fill="#C9A84C" opacity=".52"/>
+          <rect x="17" y="7"   width="6" height="6" transform="rotate(45 20 10)"  fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".38"/>
+          <rect x="67" y="7"   width="6" height="6" transform="rotate(45 70 10)"  fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".38"/>
+          <rect x="17" y="107" width="6" height="6" transform="rotate(45 20 110)" fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".38"/>
+          <rect x="67" y="107" width="6" height="6" transform="rotate(45 70 110)" fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".38"/>
         </svg>
 
         <blockquote class="about-quote" lang="ar">
@@ -706,71 +713,77 @@
   </div>
 </section>
 
-<div class="gold-rule" aria-hidden="true"></div>
+<div class="g-rule" aria-hidden="true"></div>
 
-<!-- ③ PAIN POINTS ============================================= -->
+<!-- ════════════════════════════════════════════
+     ③ PAIN POINTS
+════════════════════════════════════════════ -->
 <section id="pain" aria-labelledby="pain-h">
   <div class="wrap">
-    <p class="sec-eyebrow rv">لماذا مِرقاة؟</p>
-    <h2 class="sec-heading rv d1" id="pain-h">التحديات التي نواجهها معاً</h2>
-
+    <p class="eyebrow rv">لماذا مِرْقاة؟</p>
+    <h2 class="s-heading rv d1" id="pain-h">التحديات التي نواجهها معاً</h2>
     <div class="orn rv d2" aria-hidden="true">
-      <div class="ln ln-r"></div><div class="dm sm"></div><div class="dm"></div><div class="dm sm"></div><div class="ln ln-l"></div>
+      <div class="ol ol-r"></div>
+      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
+      <div class="ol ol-l"></div>
     </div>
 
     <div class="pain-grid">
       <article class="pain-card rv d1">
         <span class="pain-num" aria-hidden="true">١</span>
         <h3>الطالب لا يعرف التخصص الذي يناسبه</h3>
-        <p>قدرات الطالب وطموحاته غالباً لا تجد طريقها إلى قرار أكاديمي مدروس دون توجيه متخصص.</p>
+        <p>قدرات الطالب وطموحاته نادراً ما تجد طريقها إلى قرار أكاديمي مدروس بدون توجيه متخصص وموثوق.</p>
       </article>
       <article class="pain-card rv d2">
         <span class="pain-num" aria-hidden="true">٢</span>
         <h3>قرارات الأهل تُبنى على معلومات ناقصة</h3>
-        <p>يتخذ كثير من الأهل قرارات الجامعة بناءً على معلومات قديمة أو غير محدّثة عن متطلبات القبول والتخصصات.</p>
+        <p>كثير من الأسر تتخذ قرار الجامعة اعتماداً على معلومات قديمة أو غير محدّثة عن التخصصات ومتطلبات القبول.</p>
       </article>
       <article class="pain-card rv d3">
         <span class="pain-num" aria-hidden="true">٣</span>
         <h3>المدرسة تفتقر إلى جهة توجيه موثوقة</h3>
-        <p>تؤدي المدرسة دورها التعليمي بامتياز، لكنها تحتاج شريكاً متخصصاً يُكمل منظومة التوجيه الأكاديمي.</p>
+        <p>تؤدي المدرسة دورها التعليمي بامتياز، غير أنها تحتاج شريكاً متخصصاً يُكمل منظومة التوجيه الأكاديمي.</p>
       </article>
       <article class="pain-card rv d4">
         <span class="pain-num" aria-hidden="true">٤</span>
         <h3>الفجوة بين الشهادة وسوق العمل</h3>
-        <p>قرار القبول الجامعي هو النقطة التي تبدأ منها هذه الفجوة — أو تُعالَج. الاختيار الصحيح يصنع الفارق.</p>
+        <p>قرار القبول الجامعي هو النقطة التي تبدأ منها هذه الفجوة أو تُعالَج — والاختيار الصحيح يصنع الفارق.</p>
       </article>
     </div>
   </div>
 </section>
 
-<div class="gold-rule" aria-hidden="true"></div>
+<div class="g-rule" aria-hidden="true"></div>
 
-<!-- ④ BENEFITS ============================================= -->
+<!-- ════════════════════════════════════════════
+     ④ BENEFITS
+════════════════════════════════════════════ -->
 <section id="benefits" aria-labelledby="ben-h">
   <div class="wrap">
-    <p class="sec-eyebrow rv">ما الذي يتغير؟</p>
-    <h2 class="sec-heading on-cream rv d1" id="ben-h">ماذا يستفيد الطالب؟</h2>
-
-    <div class="orn cream rv d2" aria-hidden="true">
-      <div class="ln ln-r"></div><div class="dm sm"></div><div class="dm"></div><div class="dm sm"></div><div class="ln ln-l"></div>
+    <p class="eyebrow rv">ما الذي يتغير؟</p>
+    <h2 class="s-heading dark rv d1" id="ben-h">ماذا يستفيد الطالب؟</h2>
+    <div class="orn c rv d2" aria-hidden="true">
+      <div class="ol ol-r"></div>
+      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
+      <div class="ol ol-l"></div>
     </div>
 
-    <div class="benefits-grid" style="margin-top: 3rem;">
+    <div class="ben-grid">
 
-      <div class="benefit-col rv d1">
-        <div class="benefit-icon" aria-hidden="true">
+      <div class="ben-col rv d1">
+        <div class="ben-icon" aria-hidden="true">
           <!-- Compass / direction -->
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 2a8 8 0 1 1 0 16A8 8 0 0 1 12 4zm3.5 2.5l-5 3-1.5 4.5 4.5-1.5 3-5-1-.5zm-1.4 1.4l.6.3-2.1 3.5-3.5 1.1 1-3.1 4-1.8z"/>
+            <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 2a8 8 0 1 1 0 16A8 8 0 0 1 12 4zm3.5 2.5-5 3-1.5 4.5 4.5-1.5 3-5-1-.5zm-1.4 1.4.6.3-2.1 3.5-3.5 1.1 1-3.1 4-1.8z"/>
           </svg>
         </div>
         <h3>وضوح في الاتجاه</h3>
         <p>يخرج الطالب بتصوّر واضح لمساره الأكاديمي والمهني، بدلاً من الضبابية التي تسبق قرار التخصص.</p>
       </div>
 
-      <div class="benefit-col rv d2">
-        <div class="benefit-icon" aria-hidden="true">
-          <!-- Source / document -->
+      <div class="ben-col rv d2">
+        <div class="ben-icon" aria-hidden="true">
+          <!-- Document / source -->
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6zm2-5h8v1H8v-1zm0-3h8v1H8v-1zm0-3h4v1H8V9z"/>
           </svg>
@@ -779,11 +792,11 @@
         <p>يحصل الطالب على معلومات دقيقة ومحدّثة مباشرةً من خبراء في قلب منظومة التعليم العالي الأردني.</p>
       </div>
 
-      <div class="benefit-col rv d3">
-        <div class="benefit-icon" aria-hidden="true">
+      <div class="ben-col rv d3">
+        <div class="ben-icon" aria-hidden="true">
           <!-- Shield / confidence -->
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12V11c0 4.52-3.02 8.79-7 10.02C8.02 19.79 5 15.52 5 11V6.3l7-3.12zM16.59 8L11 13.59l-3.59-3.6L6 11.41 11 16.4l7-7-1.41-1.4z"/>
+            <path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18 7 3.12V11c0 4.52-3.02 8.79-7 10.02C8.02 19.79 5 15.52 5 11V6.3l7-3.12zM16.59 8 11 13.59l-3.59-3.6L6 11.41 11 16.4l7-7-1.41-1.4z"/>
           </svg>
         </div>
         <h3>ثقة في القرار</h3>
@@ -794,73 +807,71 @@
   </div>
 </section>
 
-<div class="gold-rule" aria-hidden="true"></div>
+<div class="g-rule" aria-hidden="true"></div>
 
-<!-- ⑤ EXPERTS ============================================= -->
+<!-- ════════════════════════════════════════════
+     ⑤ EXPERTS
+════════════════════════════════════════════ -->
 <section id="experts" aria-labelledby="exp-h">
   <div class="wrap">
-    <p class="sec-eyebrow rv">من نحن؟</p>
-    <h2 class="sec-heading rv d1" id="exp-h">خبراؤنا</h2>
-
+    <p class="eyebrow rv">من نحن؟</p>
+    <h2 class="s-heading rv d1" id="exp-h">خبراؤنا</h2>
     <div class="orn rv d2" aria-hidden="true">
-      <div class="ln ln-r"></div><div class="dm sm"></div><div class="dm"></div><div class="dm sm"></div><div class="ln ln-l"></div>
+      <div class="ol ol-r"></div>
+      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
+      <div class="ol ol-l"></div>
     </div>
 
     <p class="experts-intro rv d2">
-      تعتمد مِرقاة على نخبة من الخبراء الأكاديميين والإداريين الذين أمضوا أكثر من عشرين عاماً في قلب منظومة التعليم العالي الأردني. يشغل خبراؤنا مناصب قيادية في وزارات حكومية وجامعات أردنية معتمدة، وهم متحدثون أكاديميون معتمدون على المستوى الوطني.
+      تعتمد مِرْقاة على نخبة من الخبراء الأكاديميين والإداريين الذين أمضوا أكثر من عشرين عاماً في قلب منظومة التعليم العالي الأردني. يشغل خبراؤنا مناصب قيادية في وزارات حكومية وجامعات أردنية معتمدة، وهم متحدثون أكاديميون معتمدون على المستوى الوطني.
     </p>
 
-    <div class="pillars-grid">
+    <div class="pillars">
       <div class="pillar rv d1">
-        <div class="pillar-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
-          </svg>
+        <div class="pillar-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3 1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
         </div>
         <h3>خبرة أكاديمية وإدارية</h3>
         <p>أكثر من عشرين عاماً في التعليم العالي، توجيه أكاديمي، وإدارة مؤسسية على المستوى الوطني.</p>
       </div>
-
       <div class="pillar rv d2">
-        <div class="pillar-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
-          </svg>
+        <div class="pillar-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
         </div>
         <h3>مناصب حكومية وجامعية</h3>
         <p>حضور فعلي في وزارات ومؤسسات أكاديمية رسمية، مما يضمن دقة المعلومات ومصداقيتها.</p>
       </div>
-
       <div class="pillar rv d3">
-        <div class="pillar-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-          </svg>
+        <div class="pillar-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
         </div>
         <h3>متحدثون أكاديميون وطنيون</h3>
         <p>حضور موثّق في مؤتمرات ومنتديات التعليم العالي، وصوت مسموع في النقاش الأكاديمي الوطني.</p>
       </div>
     </div>
 
-    <p class="expert-disclosure rv d3" lang="ar">
+    <p class="expert-disc rv d3" lang="ar">
       تُكشَف هويات الخبراء عند التوقيع على اتفاقية الشراكة
     </p>
   </div>
 </section>
 
-<div class="gold-rule" aria-hidden="true"></div>
+<div class="g-rule" aria-hidden="true"></div>
 
-<!-- ⑥ SERVICES ============================================= -->
+<!-- ════════════════════════════════════════════
+     ⑥ SERVICES
+════════════════════════════════════════════ -->
 <section id="services" aria-labelledby="svc-h">
   <div class="wrap">
-    <p class="sec-eyebrow rv">ما نقدمه</p>
-    <h2 class="sec-heading on-cream rv d1" id="svc-h">خدماتنا الاستشارية</h2>
-
-    <div class="orn cream rv d2" aria-hidden="true">
-      <div class="ln ln-r"></div><div class="dm sm"></div><div class="dm"></div><div class="dm sm"></div><div class="ln ln-l"></div>
+    <p class="eyebrow rv">ما نقدمه</p>
+    <h2 class="s-heading dark rv d1" id="svc-h">خدماتنا الاستشارية</h2>
+    <div class="orn c rv d2" aria-hidden="true">
+      <div class="ol ol-r"></div>
+      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
+      <div class="ol ol-l"></div>
     </div>
 
-    <div class="services-grid">
+    <div class="svc-grid">
       <article class="svc-card rv d1">
         <span class="svc-tag" aria-hidden="true">خدمة ١</span>
         <h3>التوجيه الأكاديمي الجماعي</h3>
@@ -880,45 +891,50 @@
   </div>
 </section>
 
-<div class="gold-rule" aria-hidden="true"></div>
+<div class="g-rule" aria-hidden="true"></div>
 
-<!-- ⑦ EXCLUSIVITY ============================================= -->
+<!-- ════════════════════════════════════════════
+     ⑦ EXCLUSIVITY
+════════════════════════════════════════════ -->
 <section id="exclusivity" aria-labelledby="excl-h">
   <div class="wrap">
 
     <div class="excl-rule rv" aria-hidden="true"></div>
 
-    <h2 class="excl-headline rv d1" id="excl-h">لَسْنَا لِلْجَمِيعِ — نَحْنُ لِمَنْ يَسْتَحِق</h2>
+    <h2 class="excl-headline rv d1" id="excl-h" lang="ar">لَسْنَا لِلْجَمِيعِ — نَحْنُ لِمَنْ يَسْتَحِق</h2>
 
     <div class="excl-body rv d2">
-      <p>تعمل مِرقاة مع <strong>عدد محدود من المدارس سنوياً</strong>، وفق معايير انتقاء دقيقة تضمن جودة الأثر.</p>
-      <p>لا نُعلن عن خدماتنا للعموم — التواصل يكون <strong>بالدعوة المباشرة فقط</strong>.</p>
+      <p>تعمل مِرْقاة مع <strong>عدد محدود من المدارس سنوياً</strong>، وفق معايير انتقاء دقيقة تضمن جودة الأثر.</p>
+      <p>لا نُعلن عن خدماتنا للعموم — <strong>التواصل يكون بالدعوة المباشرة فقط</strong>.</p>
       <p>شراكتنا مع مدرستك تعني أننا نُعطيها الاهتمام الكامل الذي تستحقه — لا اشتراكات جماعية، ولا جهود مشتّتة.</p>
     </div>
 
-    <div class="excl-rule rv d3" style="margin-top: 3rem;" aria-hidden="true"></div>
+    <div class="excl-rule rv d3" style="margin-top:3rem" aria-hidden="true"></div>
 
   </div>
 </section>
 
-<div class="gold-rule" aria-hidden="true"></div>
+<div class="g-rule" aria-hidden="true"></div>
 
-<!-- ⑧ CONTACT ============================================= -->
+<!-- ════════════════════════════════════════════
+     ⑧ CONTACT
+════════════════════════════════════════════ -->
 <section id="contact" aria-labelledby="cta-h">
-  <div class="contact-wrap">
-    <p class="sec-eyebrow rv" style="color:var(--gold-muted);">تواصل معنا</p>
-    <h2 class="sec-heading rv d1" id="cta-h" style="color:var(--cream);">للتواصل والاستفسار</h2>
-
-    <div class="orn rv d2" aria-hidden="true">
-      <div class="ln ln-r"></div><div class="dm sm"></div><div class="dm"></div><div class="dm sm"></div><div class="ln ln-l"></div>
+  <div class="contact-inner">
+    <p class="eyebrow rv">تواصل معنا</p>
+    <h2 class="s-heading rv d1" id="cta-h">للتواصل والاستفسار</h2>
+    <div class="orn c rv d2" aria-hidden="true">
+      <div class="ol ol-r"></div>
+      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
+      <div class="ol ol-l"></div>
     </div>
 
-    <a href="https://wa.me/962788950970"
+    <a href="https://wa.me/96200000000"
        class="wa-btn rv d2"
-       aria-label="تواصل مع مِرقاة عبر واتساب"
+       aria-label="تواصل مع مِرْقاة عبر واتساب"
        rel="noopener noreferrer">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
       </svg>
       تواصل عبر واتساب
     </a>
@@ -927,18 +943,22 @@
   </div>
 </section>
 
-<!-- ⑨ FOOTER ============================================= -->
+<!-- ════════════════════════════════════════════
+     ⑨ FOOTER
+════════════════════════════════════════════ -->
 <footer>
-  <div class="gold-rule" aria-hidden="true"></div>
+  <div class="g-rule" aria-hidden="true"></div>
   <div class="footer-inner">
-    <p class="footer-logo">مِرقاة</p>
-    <p class="footer-copy">© 2025 مِرقاة — جميع الحقوق محفوظة</p>
+    <p class="footer-logo" lang="ar">مِرْقاة</p>
+    <p class="footer-copy">© 2025 مِرْقاة — جميع الحقوق محفوظة</p>
   </div>
 </footer>
 
-<!-- JAVASCRIPT ============================================= -->
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
 <script>
-  /* ── Gold Particle System ─────────────────────────── */
+  /* ── Gold Particle System ───────────────────────── */
   (function () {
     const canvas = document.getElementById('hero-canvas');
     const ctx    = canvas.getContext('2d');
@@ -968,7 +988,8 @@
       }
       draw() {
         const t = this.life / this.max;
-        ctx.globalAlpha = Math.max(0, this.a * (1 - Math.pow(t * 2 - 1, 2)));
+        const a = Math.max(0, this.a * (1 - Math.pow(t * 2 - 1, 2)));
+        ctx.globalAlpha = a;
         ctx.fillStyle   = '#C9A84C';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
@@ -980,7 +1001,7 @@
       resize();
       pts = Array.from({ length: 70 }, () => {
         const p = new P();
-        p.life  = Math.floor(Math.random() * p.max);
+        p.life = Math.floor(Math.random() * p.max);
         return p;
       });
     }
@@ -998,16 +1019,13 @@
     loop();
   })();
 
-  /* ── Scroll Reveal ────────────────────────────────── */
+  /* ── Intersection Observer — Scroll Reveal ──────── */
   (function () {
     const io = new IntersectionObserver(
       entries => entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('on');
-          io.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
       }),
-      { threshold: .1, rootMargin: '0px 0px -32px 0px' }
+      { threshold: .1, rootMargin: '0px 0px -30px 0px' }
     );
     document.querySelectorAll('.rv').forEach(el => io.observe(el));
   })();
