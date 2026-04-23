@@ -216,7 +216,7 @@ section { padding:96px 0; }
 .prob-card {
   background:var(--cream); color:var(--charcoal);
   border-right:3px solid var(--gold);
-  padding:1.6rem 1.8rem;
+  padding:2rem;
   box-shadow:0 4px 20px rgba(0,0,0,.18);
   transition:transform .28s,box-shadow .28s;
 }
@@ -224,14 +224,23 @@ section { padding:96px 0; }
   transform:translateY(-4px);
   box-shadow:0 10px 32px rgba(0,0,0,.25),0 0 0 1px rgba(201,168,76,.25);
 }
-.prob-num {
-  font-family:var(--f-disp);
-  font-size:1.7rem; color:var(--gold);
-  opacity:.35; line-height:1; margin-bottom:.5rem; display:block;
+.prob-card::before {
+  content:'';
+  display:block;
+  width:13px; height:13px;
+  background:var(--gold);
+  transform:rotate(45deg);
+  margin-bottom:1rem;
+  opacity:.62;
 }
 .prob-card p {
-  font-size:clamp(.93rem,1.75vw,1.04rem);
-  line-height:1.85; color:#2a2a3a;
+  font-size:clamp(1rem,1.85vw,1.18rem);
+  line-height:1.9; color:#2a2a3a;
+}
+.prob-card--last {
+  grid-column:1 / -1;
+  justify-self:center;
+  width:calc(50% - 9px);
 }
 
 /* ═══════════════════════════════════════════════
@@ -273,9 +282,12 @@ section { padding:96px 0; }
 
 .sess-sub {
   font-family:var(--f-body);
-  font-size:clamp(.92rem,1.8vw,1.05rem);
+  font-size:clamp(1.125rem,2.2vw,1.375rem);
   color:rgba(245,240,232,.58);
   text-align:center; margin-top:.5rem;
+}
+#sessions .s-title {
+  font-size:clamp(2.375rem,5.6vw,3.5rem);
 }
 
 .sess-cards {
@@ -293,7 +305,7 @@ section { padding:96px 0; }
 
 .sess-header {
   display:flex; align-items:center; gap:1rem;
-  padding:1.4rem 1.8rem;
+  padding:2rem;
   cursor:pointer; user-select:none;
   transition:background .22s;
 }
@@ -301,21 +313,23 @@ section { padding:96px 0; }
 
 .sess-grade {
   font-family:var(--f-body);
-  font-size:.72rem; font-weight:700;
-  letter-spacing:.14em; color:var(--navy);
+  font-size:clamp(1.25rem,2vw,1.5rem); font-weight:800;
+  letter-spacing:.02em; color:var(--navy);
   background:var(--gold);
-  padding:3px 10px; white-space:nowrap;
-  flex-shrink:0;
+  padding:6px 14px; white-space:nowrap;
+  flex-shrink:0; line-height:1.2;
 }
 .sess-type {
   font-family:var(--f-disp);
-  font-size:clamp(1rem,1.9vw,1.22rem);
-  color:var(--cream); line-height:1.3; flex:1;
+  font-size:clamp(1.06rem,2vw,1.35rem);
+  color:var(--cream); line-height:1.3; flex:1; font-weight:700;
 }
 .sess-dur {
-  font-size:.82rem; color:var(--gold-m);
-  opacity:.7; white-space:nowrap; flex-shrink:0;
+  display:flex; align-items:center; gap:5px;
+  font-size:clamp(.88rem,1.5vw,1rem); color:var(--gold-m);
+  opacity:.85; white-space:nowrap; flex-shrink:0;
 }
+.sess-dur svg { width:15px; height:15px; fill:var(--gold-m); opacity:.75; flex-shrink:0; }
 .sess-chevron {
   width:18px;height:18px;flex-shrink:0;
   color:var(--gold); opacity:.7;
@@ -327,24 +341,28 @@ section { padding:96px 0; }
   max-height:0; overflow:hidden;
   transition:max-height .4s cubic-bezier(.4,0,.2,1);
 }
-.sess-card.open .sess-body { max-height:300px; }
+.sess-card.open .sess-body { max-height:400px; }
 
 .sess-detail {
-  padding:0 1.8rem 1.6rem;
+  padding:0 2rem 2rem;
   display:grid; grid-template-columns:1fr 1fr;
-  gap:1rem;
+  gap:1.2rem;
   border-top:1px solid rgba(201,168,76,.12);
-  padding-top:1.2rem;
+  padding-top:1.4rem;
 }
 .sess-dl dt {
-  font-size:.68rem; font-weight:700;
+  font-size:.76rem; font-weight:700;
   letter-spacing:.15em; color:var(--gold);
-  opacity:.75; margin-bottom:.35rem;
+  opacity:.85; margin-bottom:.45rem;
 }
 .sess-dl dd {
-  font-size:clamp(.88rem,1.7vw,.98rem);
-  color:rgba(245,240,232,.72);
-  line-height:1.75;
+  font-size:clamp(.94rem,1.7vw,1.06rem);
+  color:rgba(245,240,232,.78);
+  line-height:1.8;
+}
+.sess-detail .sess-dl:last-child dd {
+  font-style:italic;
+  color:rgba(245,240,232,.62);
 }
 
 .sess-note {
@@ -399,14 +417,31 @@ section { padding:96px 0; }
   transition:max-height .38s cubic-bezier(.4,0,.2,1);
   background:rgba(255,255,255,.38);
 }
-.acc-item.open .acc-body { max-height:400px; }
+.acc-item.open .acc-body { max-height:1200px; }
 
 .acc-content {
-  padding:.4rem 1.6rem 1.4rem;
-  font-size:clamp(.9rem,1.7vw,1rem);
-  color:#383848; line-height:1.9;
+  padding:1rem 1.6rem 1.6rem;
   border-top:1px solid rgba(201,168,76,.15);
-  padding-top:1rem;
+}
+.acc-list {
+  list-style:none;
+  display:flex; flex-direction:column;
+  gap:13px;
+}
+.acc-list li {
+  display:flex; align-items:flex-start; gap:11px;
+  font-family:var(--f-body);
+  font-size:clamp(1rem,1.85vw,1.06rem);
+  color:var(--navy);
+  line-height:1.8;
+}
+.acc-list li::before {
+  content:'';
+  flex-shrink:0;
+  width:7px; height:7px;
+  background:var(--gold);
+  transform:rotate(45deg);
+  margin-top:.55em;
 }
 
 .topics-note {
@@ -526,8 +561,14 @@ footer {
   .wrap { padding:0 1.25rem; }
   .h-logo { font-size:4.5rem; }
   .prob-grid { grid-template-columns:1fr; }
+  .prob-card--last { width:100%; justify-self:stretch; }
   .excl-cards { grid-template-columns:1fr; }
   .sess-detail { grid-template-columns:1fr; }
+  .sess-header { padding:1.25rem; }
+  #sessions .s-title { font-size:2.375rem; }
+  .sess-sub { font-size:1.125rem; }
+  .sess-grade { font-size:1.25rem; }
+  .sess-type { font-size:1.06rem; }
 }
 @media (max-width:1024px) {
   .excl-cards { grid-template-columns:1fr 1fr; }
@@ -536,6 +577,7 @@ footer {
   .excl-cards { grid-template-columns:1fr; }
   .sess-header { flex-wrap:wrap; }
   .sess-dur { display:none; }
+  .prob-card { padding:1.5rem; }
 }
 
   </style>
@@ -601,31 +643,24 @@ footer {
 
     <div class="prob-grid">
       <article class="prob-card rv d1">
-        <span class="prob-num" aria-hidden="true">١</span>
         <p>كثير من الطلبة لا يملكون القدرة على اختيار المسار المناسب في الثانوية العامة</p>
       </article>
       <article class="prob-card rv d2">
-        <span class="prob-num" aria-hidden="true">٢</span>
         <p>كثير من الطلبة وأولياء الأمور لا يملكون معلومات دقيقة عن أنظمة الثانوية العامة</p>
       </article>
       <article class="prob-card rv d3">
-        <span class="prob-num" aria-hidden="true">٣</span>
         <p>كثير من الطلاب يصلون إلى نهاية المرحلة الثانوية دون فهم حقيقي لخياراتهم الجامعية</p>
       </article>
       <article class="prob-card rv d4">
-        <span class="prob-num" aria-hidden="true">٤</span>
         <p>كثير من أولياء الأمور لا يجدون قنوات للتواصل مع أسئلتهم وتوجهاتهم</p>
       </article>
       <article class="prob-card rv d1">
-        <span class="prob-num" aria-hidden="true">٥</span>
         <p>أولياء الأمور يعانون من ضبابية المعلومات ويلجؤون إلى مصادر غير موثوقة</p>
       </article>
       <article class="prob-card rv d2">
-        <span class="prob-num" aria-hidden="true">٦</span>
         <p>المعلومات المتاحة للعموم تفتقر إلى التفاعل والإجابة على الأسئلة الفردية</p>
       </article>
-      <article class="prob-card rv d3" style="grid-column:1 / -1; max-width:50%; margin-right:auto;">
-        <span class="prob-num" aria-hidden="true">٧</span>
+      <article class="prob-card prob-card--last rv d3">
         <p>القرارات الأكاديمية الخاطئة تُكلِّف الأسرة والطالب وقتاً ومالاً وفرصاً ضائعة</p>
       </article>
     </div>
@@ -733,7 +768,7 @@ footer {
         <div class="sess-header">
           <span class="sess-grade">الصف التاسع</span>
           <span class="sess-type">جلسة توجيهية</span>
-          <span class="sess-dur">٢–٣ ساعات</span>
+          <span class="sess-dur"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>٢–٣ ساعات</span>
           <svg class="sess-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
@@ -757,7 +792,7 @@ footer {
         <div class="sess-header">
           <span class="sess-grade">الصف العاشر والحادي عشر</span>
           <span class="sess-type">جلسة تثقيفية</span>
-          <span class="sess-dur">٢–٣ ساعات</span>
+          <span class="sess-dur"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>٢–٣ ساعات</span>
           <svg class="sess-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
@@ -781,7 +816,7 @@ footer {
         <div class="sess-header">
           <span class="sess-grade">الصف الثاني عشر</span>
           <span class="sess-type">جلسة إرشادية متخصصة</span>
-          <span class="sess-dur">٢–٣ ساعات</span>
+          <span class="sess-dur"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>٢–٣ ساعات</span>
           <svg class="sess-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
@@ -805,7 +840,7 @@ footer {
         <div class="sess-header">
           <span class="sess-grade">أولياء الأمور</span>
           <span class="sess-type">أمسية تثقيفية</span>
-          <span class="sess-dur">٢–٣ ساعات</span>
+          <span class="sess-dur"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>٢–٣ ساعات</span>
           <svg class="sess-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
@@ -829,7 +864,7 @@ footer {
         <div class="sess-header">
           <span class="sess-grade">الموجهون والعاملون</span>
           <span class="sess-type">جلسة تأهيلية</span>
-          <span class="sess-dur">٢–٣ ساعات</span>
+          <span class="sess-dur"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>٢–٣ ساعات</span>
           <svg class="sess-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
@@ -871,87 +906,129 @@ footer {
 
     <div class="accordion rv d3" role="list">
 
+      <!-- Cluster 1 -->
       <div class="acc-item" role="listitem">
         <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
           <span class="acc-title">مسارات الثانوية العامة</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="acc-body">
-          <p class="acc-content">المسار الأكاديمي والمهني، الجامعات والكليات الرسمية والخاصة، كليات الطيران والطهي والفندقة</p>
+          <div class="acc-content">
+            <ul class="acc-list">
+              <li>توضيح المسارين الأكاديمي والمهني (والحقول / البرامج) الموجودة في كل منهما وما هي التخصصات التي يحق لهما دراستها في الجامعات والكليات في درجتي البكالوريوس والدبلوم المتوسط</li>
+              <li>التعريف بالجامعات / الكليات الرسمية والجامعات / الكليات الخاصة في المملكة</li>
+              <li>التعريف بكليات الطيران وأكاديميات الطهي والفندقة</li>
+            </ul>
+          </div>
         </div>
       </div>
 
+      <!-- Cluster 2 -->
       <div class="acc-item" role="listitem">
         <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
           <span class="acc-title">منظومة القبول الجامعي الموحد</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="acc-body">
-          <p class="acc-content">الجامعات المشمولة بالقبول الموحد، آليات القبول للمناهج الأردنية والأجنبية (بريطاني، أمريكي، IB)</p>
+          <div class="acc-content">
+            <ul class="acc-list">
+              <li>توضيح الجامعات والكليات والبرامج المشمولة بالقبول الموحد</li>
+              <li>التعريف بوحدة تنسيق القبول الموحد ودورها في عمليات القبول الجامعي</li>
+              <li>توضيح آليات القبول في البرنامج العادي لطلبة الثانوية العامة الأردنية</li>
+              <li>توضيح آليات القبول الموحد في البرنامج العادي لطلبة الثانويات العامة الأجنبية (بريطاني، أمريكي، بكالوريا دولية... إلخ)</li>
+            </ul>
+          </div>
         </div>
       </div>
 
+      <!-- Cluster 3 -->
       <div class="acc-item" role="listitem">
         <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
           <span class="acc-title">فئات القبول الخاصة</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="acc-body">
-          <p class="acc-content">مكرمة الجيش، مكرمة المعلمين، التفوق الرياضي والفني، ذوو الإعاقة، مرضى السرطان، وغيرها</p>
+          <div class="acc-content">
+            <ul class="acc-list">
+              <li>قبول طلبة المكرمة الملكية السامية لأبناء العاملين والمتقاعدين العسكريين في القوات المسلحة الأردنية (مكرمة الجيش)</li>
+              <li>قبول طلبة المكرمة الملكية السامية لأبناء المعلمين العاملين والمتقاعدين في وزارة التربية والتعليم (مكرمة المعلمين)</li>
+              <li>قبول طلبة التفوق الرياضي</li>
+              <li>قبول طلبة التفوق الفني</li>
+              <li>قبول الطلبة ذوي الإعاقة</li>
+              <li>قبول الطلبة مرضى السرطان</li>
+              <li>تخصصات القبول المباشر في الجامعات والكليات الأردنية الرسمية</li>
+              <li>طلبة إساءة الاختيار</li>
+              <li>قبول الطلبة في كليتي نسيبة المازنية ورفيدة الأسلمية التابعتين لوزارة الصحة</li>
+              <li>قبول الطلبة أبناء أعضاء هيئة التدريس وأبناء العاملين في الجامعات الأردنية الرسمية</li>
+            </ul>
+          </div>
         </div>
       </div>
 
+      <!-- Cluster 4 -->
       <div class="acc-item" role="listitem">
         <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
           <span class="acc-title">البرنامج الموازي والدولي</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="acc-body">
-          <p class="acc-content">آليات القبول الموازي، الطالب الأردني مزدوج الجنسية، أبناء الأردنيات المتزوجات من غير الأردنيين</p>
+          <div class="acc-content">
+            <ul class="acc-list">
+              <li>توضيح آليات القبول في البرنامج الموازي لطلبة الثانوية العامة الأردنية</li>
+              <li>توضيح آليات القبول الموحد في البرنامج الموازي لطلبة الثانويات العامة الأجنبية (بريطاني، أمريكي، بكالوريا دولية... إلخ)</li>
+              <li>قبول الطالب الأردني مزدوج الجنسية في البرنامج الدولي</li>
+              <li>توضيح آليات قبول الطلبة أبناء الأردنيات المتزوجات من غير الأردنيين</li>
+            </ul>
+          </div>
         </div>
       </div>
 
+      <!-- Cluster 5 -->
       <div class="acc-item" role="listitem">
         <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
           <span class="acc-title">درجة الدبلوم المتوسط</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="acc-body">
-          <p class="acc-content">القبول، التجسير، إلغاء الامتحان الشامل والبدائل عنه</p>
+          <div class="acc-content">
+            <ul class="acc-list">
+              <li>القبول في درجة الدبلوم المتوسط</li>
+              <li>إنهاء درجة الدبلوم المتوسط وإكمال الدراسة عن طريق التجسير</li>
+              <li>إلغاء الامتحان الشامل والبدائل عنه</li>
+            </ul>
+          </div>
         </div>
       </div>
 
+      <!-- Cluster 6 -->
       <div class="acc-item" role="listitem">
         <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
           <span class="acc-title">الدراسة خارج الأردن</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="acc-body">
-          <p class="acc-content">الشروط والتعليمات، البعثات والمنح الخارجية، وكالات التسجيل</p>
+          <div class="acc-content">
+            <ul class="acc-list">
+              <li>الدراسة خارج المملكة (تعليمات وشروط + جامعات غير أردنية + مكاتب خدمات جامعية ووسطاء)</li>
+              <li>الاستفادة من البعثات والمنح الخارجية (للدراسة خارج المملكة)</li>
+              <li>الاستفادة من البعثات والمنح والقروض الداخلية (للدراسة داخل المملكة)</li>
+            </ul>
+          </div>
         </div>
       </div>
 
+      <!-- Cluster 7 -->
       <div class="acc-item" role="listitem">
         <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
           <span class="acc-title">ما بعد القبول</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="acc-body">
-          <p class="acc-content">الانتقال بين التخصصات والجامعات</p>
+          <div class="acc-content">
+            <ul class="acc-list">
+              <li>الانتقال من تخصص إلى آخر ومن جامعة إلى أخرى</li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -1029,7 +1106,7 @@ footer {
     </div>
 
     <div style="text-align:center;">
-      <a href="https://wa.me/96200000000"
+      <a href="https://wa.me/962795487535"
          class="wa-btn rv d2"
          aria-label="تواصل مع مِرْقاة عبر واتساب"
          rel="noopener noreferrer">
