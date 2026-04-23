@@ -3,751 +3,630 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="مِرْقاة — خدمة استشارية أكاديمية حصرية للمدارس الخاصة المتميزة في عمّان">
+  <meta name="description" content="مِرْقاة — خدمة استشارية أكاديمية حصرية للمدارس الثانوية المتميزة في الأردن">
   <title>مِرْقاة — استشارات أكاديمية متميزة</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Scheherazade+New:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ════════════════════════════════════════════
-       VARIABLES
-    ════════════════════════════════════════════ */
-    :root {
-      --navy:        #0D1F3C;
-      --gold:        #C9A84C;
-      --cream:       #F5F0E8;
-      --charcoal:    #1A1A2E;
-      --gold-muted:  #E8D5A3;
-      --gold-faint:  rgba(201,168,76,.10);
-      --gold-glow:   rgba(201,168,76,.28);
-      --f-disp:      'Amiri', serif;
-      --f-body:      'Tajawal', sans-serif;
-      --f-tash:      'Scheherazade New', serif;
-    }
 
-    /* ════════════════════════════════════════════
-       RESET & BASE
-    ════════════════════════════════════════════ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ═══════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --navy:       #0D1F3C;
+  --gold:       #C9A84C;
+  --gold-m:     #E8D5A3;
+  --cream:      #F5F0E8;
+  --charcoal:   #1A1A2E;
+  --gold-a10:   rgba(201,168,76,.10);
+  --gold-a22:   rgba(201,168,76,.22);
+  --gold-a45:   rgba(201,168,76,.45);
+  --f-disp:     'Amiri', serif;
+  --f-body:     'Tajawal', sans-serif;
+}
 
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
+/* ═══════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════ */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: var(--f-body);
+  background: var(--navy);
+  color: var(--cream);
+  direction: rtl;
+  text-align: right;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-    body {
-      font-family: var(--f-body);
-      background: var(--navy);
-      color: var(--cream);
-      direction: rtl;
-      text-align: right;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+/* ═══════════════════════════════════════════════
+   LAYOUT HELPERS
+═══════════════════════════════════════════════ */
+.wrap { max-width:1140px; margin:0 auto; padding:0 2rem; }
+section { padding:96px 0; }
 
-    /* ════════════════════════════════════════════
-       LAYOUT UTILITIES
-    ════════════════════════════════════════════ */
-    .wrap {
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+/* ═══════════════════════════════════════════════
+   SECTION HEADER
+═══════════════════════════════════════════════ */
+.eyebrow {
+  font-family: var(--f-body);
+  font-size:.68rem; font-weight:700;
+  letter-spacing:.22em; text-align:center;
+  color:var(--gold); opacity:.82;
+  margin-bottom:.65rem;
+}
+.s-title {
+  font-family: var(--f-disp);
+  font-size: clamp(1.85rem,4vw,2.85rem);
+  text-align:center; line-height:1.38;
+}
+.s-title.dark { color:var(--navy); }
 
-    section { padding: 100px 0; }
+/* ═══════════════════════════════════════════════
+   ORNAMENTAL DIVIDERS
+═══════════════════════════════════════════════ */
+.g-rule {
+  width:100%; height:1px;
+  background:linear-gradient(to left,transparent,var(--gold),transparent);
+}
 
-    /* ════════════════════════════════════════════
-       SECTION HEADER BLOCK
-    ════════════════════════════════════════════ */
-    .eyebrow {
-      font-family: var(--f-body);
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .22em;
-      color: var(--gold);
-      text-align: center;
-      margin-bottom: .7rem;
-      opacity: .8;
-    }
-    .s-heading {
-      font-family: var(--f-disp);
-      font-size: clamp(1.9rem, 4vw, 2.9rem);
-      text-align: center;
-      line-height: 1.38;
-    }
-    .s-heading.dark { color: var(--navy); }
+.orn {
+  display:flex; align-items:center; justify-content:center;
+  gap:10px; margin:1.6rem 0;
+}
+.orn .l { flex:1; max-width:120px; height:1px; }
+.orn .lr { background:linear-gradient(to left, transparent,var(--gold)); }
+.orn .ll { background:linear-gradient(to right,transparent,var(--gold)); }
+.orn .d  { width:7px;height:7px;background:var(--gold);transform:rotate(45deg);flex-shrink:0; }
+.orn .ds { width:4px;height:4px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;opacity:.4; }
+/* cream variant */
+.orn.cr .d  { background:rgba(13,31,60,.5); }
+.orn.cr .ds { background:rgba(13,31,60,.3); }
+.orn.cr .lr { background:linear-gradient(to left, transparent,rgba(13,31,60,.4)); }
+.orn.cr .ll { background:linear-gradient(to right,transparent,rgba(13,31,60,.4)); }
 
-    /* ════════════════════════════════════════════
-       ORNAMENTAL ELEMENTS
-    ════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════ */
+.rv {
+  opacity:0; transform:translateY(30px);
+  transition: opacity .8s cubic-bezier(.22,.68,0,1.1),
+              transform .8s cubic-bezier(.22,.68,0,1.1);
+}
+.rv.on { opacity:1; transform:translateY(0); }
+.d1{transition-delay:.07s} .d2{transition-delay:.15s}
+.d3{transition-delay:.23s} .d4{transition-delay:.31s}
+.d5{transition-delay:.39s}
 
-    /* Full-width gradient rule */
-    .g-rule {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(to left, transparent, var(--gold), transparent);
-      flex-shrink: 0;
-    }
+/* ═══════════════════════════════════════════════
+   KEYFRAMES
+═══════════════════════════════════════════════ */
+@keyframes glow {
+  0%,100% { text-shadow:0 0 18px rgba(201,168,76,.48),0 0 38px rgba(201,168,76,.20); }
+  50%      { text-shadow:0 0 30px rgba(201,168,76,.82),0 0 58px rgba(201,168,76,.42),0 0 88px rgba(201,168,76,.16); }
+}
+@keyframes drop {
+  0%,100% { transform:translate(-50%,0);   opacity:.84; }
+  55%      { transform:translate(-50%,9px); opacity:.28; }
+}
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(-16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
 
-    /* Centered diamond-and-line row */
-    .orn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 11px;
-      margin: 1.7rem 0;
-    }
-    .orn .ol { flex: 1; max-width: 130px; height: 1px; }
-    .orn .ol-r { background: linear-gradient(to left,  transparent, var(--gold)); }
-    .orn .ol-l { background: linear-gradient(to right, transparent, var(--gold)); }
-    .orn .od  {
-      width: 7px; height: 7px;
-      background: var(--gold);
-      transform: rotate(45deg);
-      flex-shrink: 0;
-    }
-    .orn .od.sm { width: 4px; height: 4px; opacity: .42; }
+/* ═══════════════════════════════════════════════
+   ① HERO
+═══════════════════════════════════════════════ */
+#hero {
+  position:relative; min-height:100vh;
+  background:var(--navy);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  overflow:hidden; padding:0;
+}
+#hero-canvas { position:absolute;inset:0;width:100%;height:100%;z-index:0; }
+.h-grain {
+  position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.034;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:240px;
+}
+.h-glow {
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-57%);
+  width:680px;height:680px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 68%);
+  z-index:1;pointer-events:none;
+}
+.h-content {
+  position:relative;z-index:2;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:1.2rem;
+  animation:fadeUp .9s ease both .1s;
+}
+.h-line {
+  width:200px;height:1px;
+  background:linear-gradient(to left,transparent,var(--gold),transparent);
+  position:relative;
+}
+.h-line::before {
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(45deg);
+  width:5px;height:5px;background:var(--gold);
+}
+.h-logo {
+  font-family:var(--f-disp);
+  font-size:clamp(5rem,15vw,10.5rem);
+  font-weight:700; color:var(--gold);
+  line-height:1.08; letter-spacing:.04em;
+  white-space:nowrap; width:auto; overflow:visible;
+  animation:glow 3.4s ease-in-out infinite;
+}
+.h-tag {
+  font-family:var(--f-disp);
+  font-size:clamp(1.1rem,2.6vw,1.6rem);
+  color:var(--gold-m); font-style:italic; opacity:.9;
+}
+.h-sub {
+  font-family:var(--f-body);
+  font-size:clamp(.88rem,1.8vw,1.05rem);
+  color:rgba(245,240,232,.58);
+  font-weight:400; letter-spacing:.02em;
+}
+.scroll-ind {
+  position:absolute;bottom:2.4rem;left:50%;
+  transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  animation:drop 2.3s ease-in-out infinite;
+}
+.scroll-ind .stem { width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent); }
+.scroll-ind svg  { width:13px;height:13px;fill:var(--gold);opacity:.6; }
 
-    /* Cream variant */
-    .orn.c .od    { background: rgba(13,31,60,.55); }
-    .orn.c .od.sm { background: rgba(13,31,60,.35); }
-    .orn.c .ol-r  { background: linear-gradient(to left,  transparent, rgba(13,31,60,.4)); }
-    .orn.c .ol-l  { background: linear-gradient(to right, transparent, rgba(13,31,60,.4)); }
+/* ═══════════════════════════════════════════════
+   ② ABOUT
+═══════════════════════════════════════════════ */
+#about { background:var(--cream); color:var(--charcoal); }
 
-    /* ════════════════════════════════════════════
-       SCROLL REVEAL
-    ════════════════════════════════════════════ */
-    .rv {
-      opacity: 0;
-      transform: translateY(32px);
-      transition:
-        opacity  .84s cubic-bezier(.22,.68,0,1.12),
-        transform .84s cubic-bezier(.22,.68,0,1.12);
-    }
-    .rv.on { opacity: 1; transform: translateY(0); }
-    .d1 { transition-delay: .08s; }
-    .d2 { transition-delay: .18s; }
-    .d3 { transition-delay: .28s; }
-    .d4 { transition-delay: .38s; }
+.about-body {
+  max-width:820px; margin:2rem auto 0;
+  font-size:clamp(1rem,1.9vw,1.12rem);
+  color:#282838; line-height:2.1;
+}
+.about-callout {
+  margin-top:2.2rem; padding:1.5rem 2rem;
+  border-right:3px solid var(--gold);
+  background:rgba(201,168,76,.07);
+}
+.about-callout p {
+  font-family:var(--f-disp);
+  font-size:clamp(1.1rem,2.2vw,1.4rem);
+  color:var(--navy); line-height:1.6; font-weight:700;
+}
 
-    /* ════════════════════════════════════════════
-       KEYFRAMES
-    ════════════════════════════════════════════ */
-    @keyframes logoGlow {
-      0%, 100% {
-        text-shadow:
-          0 0 18px rgba(201,168,76,.48),
-          0 0 40px rgba(201,168,76,.20);
-      }
-      50% {
-        text-shadow:
-          0 0 30px rgba(201,168,76,.82),
-          0 0 60px rgba(201,168,76,.44),
-          0 0 90px rgba(201,168,76,.18);
-      }
-    }
+/* ═══════════════════════════════════════════════
+   ③ PROBLEMS
+═══════════════════════════════════════════════ */
+#problems { background:var(--navy); }
 
-    @keyframes arrowDrop {
-      0%, 100% { transform: translate(-50%, 0);    opacity: .85; }
-      55%       { transform: translate(-50%, 9px);  opacity: .30; }
-    }
+.prob-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px; margin-top:52px;
+}
+.prob-card {
+  background:var(--cream); color:var(--charcoal);
+  border-right:3px solid var(--gold);
+  padding:1.6rem 1.8rem;
+  box-shadow:0 4px 20px rgba(0,0,0,.18);
+  transition:transform .28s,box-shadow .28s;
+}
+.prob-card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 10px 32px rgba(0,0,0,.25),0 0 0 1px rgba(201,168,76,.25);
+}
+.prob-num {
+  font-family:var(--f-disp);
+  font-size:1.7rem; color:var(--gold);
+  opacity:.35; line-height:1; margin-bottom:.5rem; display:block;
+}
+.prob-card p {
+  font-size:clamp(.93rem,1.75vw,1.04rem);
+  line-height:1.85; color:#2a2a3a;
+}
 
-    @keyframes heroIn {
-      from { opacity: 0; transform: translateY(-18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+/* ═══════════════════════════════════════════════
+   ④ WHY MARQAA
+═══════════════════════════════════════════════ */
+#why { background:var(--cream); color:var(--charcoal); }
 
-    /* ════════════════════════════════════════════
-       ① HERO
-    ════════════════════════════════════════════ */
-    #hero {
-      position: relative;
-      min-height: 100vh;
-      background: var(--navy);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: 0;
-    }
+.why-list {
+  display:flex; flex-direction:column;
+  gap:0; margin-top:3rem;
+}
+.why-row {
+  display:flex; align-items:flex-start; gap:1.4rem;
+  padding:1.6rem 0;
+  border-bottom:1px solid rgba(201,168,76,.2);
+}
+.why-row:first-child { border-top:1px solid rgba(201,168,76,.2); }
+.why-icon {
+  flex-shrink:0; margin-top:.2rem;
+  width:22px; height:22px;
+}
+.why-icon svg { width:100%;height:100%; }
+.why-text { flex:1; }
+.why-text strong {
+  font-family:var(--f-disp);
+  font-size:clamp(1.05rem,2vw,1.25rem);
+  color:var(--navy); display:block;
+  margin-bottom:.35rem; line-height:1.4;
+}
+.why-text span {
+  font-size:clamp(.9rem,1.7vw,1rem);
+  color:#383848; line-height:1.8;
+}
 
-    /* Particle canvas */
-    #hero-canvas {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-    }
+/* ═══════════════════════════════════════════════
+   ⑤ SESSIONS
+═══════════════════════════════════════════════ */
+#sessions { background:var(--navy); }
 
-    /* Grain texture */
-    .hero-grain {
-      position: absolute; inset: 0; z-index: 1;
-      pointer-events: none; opacity: .035;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23g)'/%3E%3C/svg%3E");
-      background-size: 260px;
-    }
+.sess-sub {
+  font-family:var(--f-body);
+  font-size:clamp(.92rem,1.8vw,1.05rem);
+  color:rgba(245,240,232,.58);
+  text-align:center; margin-top:.5rem;
+}
 
-    /* Radial glow */
-    .hero-glow {
-      position: absolute; z-index: 1; pointer-events: none;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -56%);
-      width: 680px; height: 680px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,.07) 0%, transparent 68%);
-    }
+.sess-cards {
+  display:flex; flex-direction:column;
+  gap:10px; margin-top:3rem;
+}
 
-    /* Content wrapper */
-    .hero-content {
-      position: relative; z-index: 2;
-      text-align: center;
-      display: flex; flex-direction: column;
-      align-items: center; gap: 1.3rem;
-      animation: heroIn .95s ease both .12s;
-    }
+.sess-card {
+  border:1px solid var(--gold-a22);
+  background:linear-gradient(145deg,rgba(201,168,76,.05),transparent);
+  overflow:hidden;
+  transition:border-color .28s;
+}
+.sess-card.open { border-color:var(--gold-a45); }
 
-    /* Thin ornamental lines flanking logo */
-    .hero-line {
-      width: 210px; height: 1px;
-      background: linear-gradient(to left, transparent, var(--gold), transparent);
-      position: relative;
-    }
-    .hero-line::before {
-      content: '';
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%) rotate(45deg);
-      width: 5px; height: 5px;
-      background: var(--gold);
-    }
+.sess-header {
+  display:flex; align-items:center; gap:1rem;
+  padding:1.4rem 1.8rem;
+  cursor:pointer; user-select:none;
+  transition:background .22s;
+}
+.sess-header:hover { background:rgba(201,168,76,.05); }
 
-    /* Logo */
-    .hero-logo {
-      font-family: var(--f-disp);
-      font-size: clamp(5.5rem, 16vw, 11rem);
-      font-weight: 700;
-      color: var(--gold);
-      line-height: 1.1;
-      letter-spacing: .04em;
-      white-space: nowrap;
-      width: auto;
-      overflow: visible;
-      animation: logoGlow 3.4s ease-in-out infinite;
-    }
+.sess-grade {
+  font-family:var(--f-body);
+  font-size:.72rem; font-weight:700;
+  letter-spacing:.14em; color:var(--navy);
+  background:var(--gold);
+  padding:3px 10px; white-space:nowrap;
+  flex-shrink:0;
+}
+.sess-type {
+  font-family:var(--f-disp);
+  font-size:clamp(1rem,1.9vw,1.22rem);
+  color:var(--cream); line-height:1.3; flex:1;
+}
+.sess-dur {
+  font-size:.82rem; color:var(--gold-m);
+  opacity:.7; white-space:nowrap; flex-shrink:0;
+}
+.sess-chevron {
+  width:18px;height:18px;flex-shrink:0;
+  color:var(--gold); opacity:.7;
+  transition:transform .3s;
+}
+.sess-card.open .sess-chevron { transform:rotate(180deg); }
 
-    /* Tagline */
-    .hero-tagline {
-      font-family: var(--f-tash);
-      font-size: clamp(1rem, 2.5vw, 1.5rem);
-      color: var(--gold-muted);
-      font-style: italic;
-      opacity: .88;
-      letter-spacing: .04em;
-      font-feature-settings: "calt" 1, "clig" 1;
-      text-rendering: optimizeLegibility;
-    }
+.sess-body {
+  max-height:0; overflow:hidden;
+  transition:max-height .4s cubic-bezier(.4,0,.2,1);
+}
+.sess-card.open .sess-body { max-height:300px; }
 
-    /* Scroll indicator */
-    .scroll-ind {
-      position: absolute; bottom: 2.5rem; left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-      animation: arrowDrop 2.3s ease-in-out infinite;
-    }
-    .scroll-ind .si-stem {
-      width: 1px; height: 38px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-    }
-    .scroll-ind svg { width: 14px; height: 14px; fill: var(--gold); opacity: .6; }
+.sess-detail {
+  padding:0 1.8rem 1.6rem;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:1rem;
+  border-top:1px solid rgba(201,168,76,.12);
+  padding-top:1.2rem;
+}
+.sess-dl dt {
+  font-size:.68rem; font-weight:700;
+  letter-spacing:.15em; color:var(--gold);
+  opacity:.75; margin-bottom:.35rem;
+}
+.sess-dl dd {
+  font-size:clamp(.88rem,1.7vw,.98rem);
+  color:rgba(245,240,232,.72);
+  line-height:1.75;
+}
 
-    /* ════════════════════════════════════════════
-       ② ABOUT
-    ════════════════════════════════════════════ */
-    #about { background: var(--cream); color: var(--charcoal); }
+.sess-note {
+  text-align:center; margin-top:2.2rem;
+  font-family:var(--f-disp);
+  font-size:.88rem; font-style:italic;
+  color:rgba(245,240,232,.38);
+}
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: center;
-      margin-top: 3rem;
-    }
+/* ═══════════════════════════════════════════════
+   ⑥ TOPICS
+═══════════════════════════════════════════════ */
+#topics { background:var(--cream); color:var(--charcoal); }
 
-    /* Text — first in DOM = right column in RTL */
-    .about-text .accent-bar {
-      width: 50px; height: 3px;
-      background: var(--gold); border-radius: 2px;
-      margin-bottom: 1.4rem;
-    }
-    .about-text h2 {
-      font-family: var(--f-disp);
-      font-size: clamp(1.6rem, 3.2vw, 2.3rem);
-      color: var(--navy);
-      margin-bottom: 1.4rem;
-      line-height: 1.48;
-    }
-    .about-text p {
-      font-size: clamp(.97rem, 1.85vw, 1.1rem);
-      color: #282838;
-      line-height: 2.1;
-      margin-bottom: 1.1rem;
-    }
-    .about-text p:last-child { margin-bottom: 0; }
+.topics-intro {
+  text-align:center; margin:0 auto 3rem;
+  max-width:680px;
+  font-size:clamp(.93rem,1.75vw,1.04rem);
+  color:#383848; line-height:1.9;
+}
 
-    /* Illustration — second in DOM = left column in RTL */
-    .about-illus {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 2rem;
-    }
-    .about-illus svg.ladder { width: 100px; }
+.accordion {
+  display:flex; flex-direction:column;
+  border:1px solid rgba(201,168,76,.28);
+}
 
-    .about-quote {
-      font-family: var(--f-disp);
-      font-size: clamp(1.2rem, 2.3vw, 1.65rem);
-      color: var(--navy);
-      text-align: center;
-      line-height: 2;
-      font-style: italic;
-      position: relative;
-      padding: 1.4rem 1.8rem;
-    }
-    .about-quote::before {
-      content: '❝';
-      font-family: serif; font-size: 3.4rem;
-      color: var(--gold); opacity: .3;
-      position: absolute; top: -4px; right: 0; line-height: 1;
-    }
-    .about-quote::after {
-      content: '❞';
-      font-family: serif; font-size: 3.4rem;
-      color: var(--gold); opacity: .3;
-      position: absolute; bottom: -12px; left: 0; line-height: 1;
-    }
+.acc-item { border-bottom:1px solid rgba(201,168,76,.18); }
+.acc-item:last-child { border-bottom:none; }
 
-    /* ════════════════════════════════════════════
-       ③ PAIN POINTS
-    ════════════════════════════════════════════ */
-    #pain { background: var(--navy); }
+.acc-header {
+  display:flex; align-items:center; gap:1rem;
+  padding:1.25rem 1.6rem;
+  cursor:pointer; user-select:none;
+  background:rgba(255,255,255,.6);
+  transition:background .22s;
+}
+.acc-header:hover { background:rgba(201,168,76,.07); }
 
-    .pain-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
-      margin-top: 52px;
-    }
+.acc-title {
+  font-family:var(--f-disp);
+  font-size:clamp(1rem,1.9vw,1.18rem);
+  color:var(--navy); line-height:1.35; flex:1;
+}
+.acc-chevron {
+  width:16px;height:16px;flex-shrink:0;
+  color:var(--gold); transition:transform .3s;
+}
+.acc-item.open .acc-chevron { transform:rotate(180deg); }
 
-    .pain-card {
-      border: 1px solid rgba(201,168,76,.18);
-      padding: 2.2rem;
-      background: linear-gradient(145deg, rgba(201,168,76,.04), transparent);
-      transition: border-color .3s, transform .3s, box-shadow .3s;
-    }
-    .pain-card:hover {
-      border-color: rgba(201,168,76,.48);
-      transform: translateY(-5px);
-      box-shadow: 0 18px 38px rgba(0,0,0,.2), 0 0 0 1px rgba(201,168,76,.2);
-    }
-    .pain-num {
-      display: block;
-      font-family: var(--f-disp);
-      font-size: 2.7rem;
-      color: rgba(201,168,76,.18);
-      line-height: 1; margin-bottom: .7rem;
-    }
-    .pain-card h3 {
-      font-family: var(--f-disp);
-      font-size: clamp(1.05rem, 1.9vw, 1.28rem);
-      color: var(--gold-muted);
-      line-height: 1.5; margin-bottom: .7rem;
-    }
-    .pain-card p {
-      font-size: .9rem;
-      color: rgba(245,240,232,.55);
-      line-height: 1.82;
-    }
+.acc-body {
+  max-height:0; overflow:hidden;
+  transition:max-height .38s cubic-bezier(.4,0,.2,1);
+  background:rgba(255,255,255,.38);
+}
+.acc-item.open .acc-body { max-height:400px; }
 
-    /* ════════════════════════════════════════════
-       ④ BENEFITS
-    ════════════════════════════════════════════ */
-    #benefits { background: var(--cream); color: var(--charcoal); }
+.acc-content {
+  padding:.4rem 1.6rem 1.4rem;
+  font-size:clamp(.9rem,1.7vw,1rem);
+  color:#383848; line-height:1.9;
+  border-top:1px solid rgba(201,168,76,.15);
+  padding-top:1rem;
+}
 
-    .ben-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      margin-top: 3rem;
-    }
+.topics-note {
+  text-align:center; margin-top:2.4rem;
+  font-family:var(--f-disp);
+  font-size:.88rem; font-style:italic;
+  color:rgba(56,56,72,.55);
+  max-width:680px; margin-left:auto; margin-right:auto;
+}
 
-    .ben-col {
-      display: flex; flex-direction: column;
-      align-items: flex-start; gap: 1rem;
-    }
-    .ben-icon {
-      width: 46px; height: 46px;
-      border: 1px solid rgba(201,168,76,.35);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .ben-icon svg { width: 22px; height: 22px; fill: var(--gold); }
+/* ═══════════════════════════════════════════════
+   ⑦ EXCLUSIVITY
+═══════════════════════════════════════════════ */
+#exclusivity { background:var(--navy); text-align:center; }
 
-    .ben-col h3 {
-      font-family: var(--f-disp);
-      font-size: clamp(1.08rem, 2vw, 1.32rem);
-      color: var(--navy); line-height: 1.42;
-    }
-    .ben-col p {
-      font-size: .93rem;
-      color: #333346; line-height: 1.88;
-    }
+.excl-headline {
+  font-family:var(--f-disp);
+  font-size:clamp(2.2rem,5.5vw,4.2rem);
+  color:var(--gold); line-height:1.25;
+  margin:1.8rem 0 .9rem;
+}
+.excl-sub {
+  font-family:var(--f-body);
+  font-size:clamp(.97rem,1.9vw,1.12rem);
+  color:rgba(245,240,232,.62);
+  margin-bottom:3rem;
+}
 
-    /* ════════════════════════════════════════════
-       ⑤ EXPERTS
-    ════════════════════════════════════════════ */
-    #experts { background: var(--navy); }
+.excl-cards {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.excl-card {
+  background:var(--cream); color:var(--charcoal);
+  border:1px solid rgba(201,168,76,.3);
+  padding:2rem 1.6rem; text-align:center;
+  transition:transform .28s,box-shadow .28s,border-color .28s;
+}
+.excl-card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 16px 36px rgba(0,0,0,.22);
+  border-color:rgba(201,168,76,.6);
+}
+.excl-card-icon {
+  display:flex;align-items:center;justify-content:center;
+  width:44px;height:44px;
+  border:1px solid rgba(201,168,76,.35);
+  margin:0 auto 1.1rem;
+}
+.excl-card-icon svg { width:20px;height:20px;fill:var(--gold); }
+.excl-card h3 {
+  font-family:var(--f-disp);
+  font-size:clamp(1.05rem,1.9vw,1.25rem);
+  color:var(--navy); margin-bottom:.6rem;
+}
+.excl-card p { font-size:.9rem; color:#383848; line-height:1.8; }
 
-    .experts-intro {
-      max-width: 700px;
-      margin: 0 auto 3.5rem;
-      text-align: center;
-      font-size: clamp(.97rem, 1.85vw, 1.08rem);
-      color: rgba(245,240,232,.68);
-      line-height: 2.05;
-    }
+/* ═══════════════════════════════════════════════
+   ⑧ CONTACT
+═══════════════════════════════════════════════ */
+#contact { background:var(--cream); color:var(--charcoal); text-align:center; }
 
-    .pillars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-bottom: 2.8rem;
-    }
+#contact .eyebrow { color:rgba(13,31,60,.5); }
 
-    .pillar {
-      border: 1px solid rgba(201,168,76,.17);
-      padding: 2.6rem 1.8rem;
-      text-align: center;
-      background: linear-gradient(180deg, rgba(201,168,76,.05), transparent);
-      transition: border-color .3s;
-    }
-    .pillar:hover { border-color: rgba(201,168,76,.42); }
+.wa-btn {
+  display:inline-flex; align-items:center; gap:11px;
+  background:var(--gold); color:var(--navy);
+  font-family:var(--f-body); font-size:1.08rem; font-weight:700;
+  padding:1rem 2.6rem; text-decoration:none;
+  margin:2.8rem 0 1.5rem;
+  letter-spacing:.03em;
+  transition:background .26s,transform .2s,box-shadow .26s;
+}
+.wa-btn svg { width:21px;height:21px;fill:var(--navy);flex-shrink:0; }
+.wa-btn:hover {
+  background:var(--gold-m);
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(201,168,76,.3);
+}
+.cta-note {
+  font-family:var(--f-disp);
+  font-size:.88rem; font-style:italic;
+  color:rgba(13,31,60,.38);
+}
 
-    .pillar-ico {
-      width: 40px; height: 40px;
-      margin: 0 auto 1.2rem;
-    }
-    .pillar-ico svg { width: 100%; height: 100%; fill: var(--gold); opacity: .72; }
+/* ═══════════════════════════════════════════════
+   ⑨ FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  background:var(--charcoal);
+  text-align:center;
+  padding-bottom:2.6rem;
+}
+.footer-inner { padding-top:2.4rem; }
+.footer-logo {
+  font-family:var(--f-disp);
+  font-size:2.2rem; color:var(--gold);
+  letter-spacing:.06em; margin-bottom:.7rem;
+  animation:glow 3.4s ease-in-out infinite;
+}
+.footer-desc {
+  font-size:.88rem;
+  color:rgba(245,240,232,.45);
+  line-height:1.9; margin-bottom:.25rem;
+}
+.footer-copy {
+  font-size:.78rem;
+  color:rgba(245,240,232,.25);
+  margin-top:.5rem;
+}
 
-    .pillar h3 {
-      font-family: var(--f-disp);
-      font-size: clamp(1rem, 1.8vw, 1.2rem);
-      color: var(--gold-muted);
-      line-height: 1.5; margin-bottom: .7rem;
-    }
-    .pillar p {
-      font-size: .87rem;
-      color: rgba(245,240,232,.5);
-      line-height: 1.76;
-    }
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width:768px) {
+  section { padding:70px 0; }
+  .wrap { padding:0 1.25rem; }
+  .h-logo { font-size:4.5rem; }
+  .prob-grid { grid-template-columns:1fr; }
+  .excl-cards { grid-template-columns:1fr; }
+  .sess-detail { grid-template-columns:1fr; }
+}
+@media (max-width:1024px) {
+  .excl-cards { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:480px) {
+  .excl-cards { grid-template-columns:1fr; }
+  .sess-header { flex-wrap:wrap; }
+  .sess-dur { display:none; }
+}
 
-    .expert-disc {
-      text-align: center;
-      font-family: var(--f-disp);
-      font-size: .87rem;
-      color: rgba(245,240,232,.32);
-      font-style: italic;
-      border-top: 1px solid rgba(201,168,76,.1);
-      padding-top: 1.8rem;
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    /* ════════════════════════════════════════════
-       ⑥ SERVICES
-    ════════════════════════════════════════════ */
-    #services { background: var(--cream); color: var(--charcoal); }
-
-    .svc-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 26px;
-      margin-top: 52px;
-    }
-
-    .svc-card {
-      border: 1px solid rgba(201,168,76,.27);
-      padding: 2.6rem 2rem;
-      background: rgba(255,255,255,.52);
-      position: relative; overflow: hidden;
-      transition: transform .3s, box-shadow .3s, border-color .3s;
-    }
-    .svc-card::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(145deg, rgba(201,168,76,.07), transparent);
-      opacity: 0; transition: opacity .3s;
-    }
-    .svc-card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 22px 44px rgba(13,31,60,.12), 0 0 0 1px rgba(201,168,76,.5);
-      border-color: rgba(201,168,76,.55);
-    }
-    .svc-card:hover::after { opacity: 1; }
-
-    .svc-tag {
-      display: inline-block;
-      font-size: .68rem; font-weight: 700;
-      letter-spacing: .16em;
-      color: var(--gold);
-      border: 1px solid rgba(201,168,76,.28);
-      padding: 3px 10px;
-      margin-bottom: 1.1rem;
-    }
-    .svc-card h3 {
-      font-family: var(--f-disp);
-      font-size: clamp(1.05rem, 1.9vw, 1.32rem);
-      color: var(--navy);
-      margin-bottom: .9rem; line-height: 1.5;
-    }
-    .svc-card p {
-      font-size: .93rem;
-      color: #333346; line-height: 1.86;
-    }
-
-    /* ════════════════════════════════════════════
-       ⑦ EXCLUSIVITY
-    ════════════════════════════════════════════ */
-    #exclusivity { background: var(--navy); text-align: center; }
-
-    .excl-rule {
-      width: 360px; max-width: 90%; height: 1px;
-      background: linear-gradient(to left, transparent, var(--gold), transparent);
-      margin: 0 auto;
-    }
-
-    .excl-headline {
-      font-family: var(--f-tash);
-      font-size: clamp(2rem, 5vw, 4rem);
-      color: #C9A84C;
-      line-height: 1.3;
-      white-space: nowrap;
-      margin: 2.8rem auto;
-      max-width: 100%;
-      font-feature-settings: "calt" 1, "clig" 1;
-      text-rendering: optimizeLegibility;
-    }
-
-    .excl-body {
-      max-width: 640px;
-      margin: 0 auto;
-      font-size: clamp(.97rem, 1.85vw, 1.08rem);
-      color: rgba(245,240,232,.68);
-      line-height: 2.2;
-    }
-    .excl-body p { margin-bottom: .9rem; }
-    .excl-body p:last-child { margin-bottom: 0; }
-    .excl-body strong { color: var(--gold-muted); font-weight: 700; }
-
-    /* ════════════════════════════════════════════
-       ⑧ CONTACT
-    ════════════════════════════════════════════ */
-    #contact { background: var(--cream); color: var(--charcoal); text-align: center; }
-
-    .contact-inner {
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    #contact .s-heading { color: var(--navy); }
-    #contact .eyebrow   { color: rgba(13,31,60,.55); }
-
-    .wa-btn {
-      display: inline-flex;
-      align-items: center; gap: 11px;
-      background: var(--gold);
-      color: var(--navy);
-      font-family: var(--f-body);
-      font-size: 1.08rem; font-weight: 700;
-      padding: 1rem 2.6rem;
-      text-decoration: none;
-      margin: 2.8rem 0 1.6rem;
-      letter-spacing: .03em;
-      transition: background .28s, transform .2s, box-shadow .28s;
-    }
-    .wa-btn svg { width: 21px; height: 21px; fill: var(--navy); flex-shrink: 0; }
-    .wa-btn:hover {
-      background: var(--gold-muted);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(201,168,76,.28);
-    }
-
-    .contact-note {
-      font-family: var(--f-disp);
-      font-size: .88rem;
-      color: rgba(13,31,60,.38);
-      font-style: italic;
-    }
-
-    /* ════════════════════════════════════════════
-       ⑨ FOOTER
-    ════════════════════════════════════════════ */
-    footer {
-      background: var(--charcoal);
-      text-align: center;
-      padding-bottom: 2.6rem;
-    }
-    .footer-inner { padding-top: 2.5rem; }
-
-    .footer-logo {
-      font-family: var(--f-disp);
-      font-size: 2.3rem;
-      color: var(--gold);
-      letter-spacing: .06em;
-      margin-bottom: .85rem;
-      animation: logoGlow 3.4s ease-in-out infinite;
-    }
-    .footer-copy {
-      font-size: .8rem;
-      color: rgba(245,240,232,.28);
-    }
-
-    /* ════════════════════════════════════════════
-       RESPONSIVE
-    ════════════════════════════════════════════ */
-    @media (max-width: 960px) {
-      .about-grid     { grid-template-columns: 1fr; gap: 44px; }
-      .about-illus    { display: none; }
-      .ben-grid       { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
-      .ben-col        { align-items: flex-start; }
-      .pillars        { grid-template-columns: 1fr; gap: 0; }
-      .pillar         { border-bottom: none; }
-      .pillar:last-child { border-bottom: 1px solid rgba(201,168,76,.17); }
-      .svc-grid       { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
-      .pain-grid      { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
-      .excl-headline  { white-space: normal; font-size: clamp(1.5rem, 5vw, 2.5rem); }
-    }
-
-    @media (max-width: 600px) {
-      .wrap         { padding: 0 1.25rem; }
-      section       { padding: 72px 0; }
-      .hero-logo    { font-size: 4.5rem; }
-    }
   </style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      ① HERO
-════════════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <section id="hero" aria-label="مِرْقاة — الصفحة الرئيسية">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
-  <div class="hero-grain" aria-hidden="true"></div>
-  <div class="hero-glow"  aria-hidden="true"></div>
+  <div class="h-grain" aria-hidden="true"></div>
+  <div class="h-glow"  aria-hidden="true"></div>
 
-  <div class="hero-content">
-    <div class="hero-line" aria-hidden="true"></div>
-    <h1 class="hero-logo" lang="ar">مِرْقاة</h1>
-    <div class="hero-line" aria-hidden="true"></div>
-    <p class="hero-tagline" lang="ar">بَوَّابَتُكَ نَحْوَ القَرَارِ الأَكَادِيمِيِّ الصَّحِيح</p>
+  <div class="h-content">
+    <div class="h-line" aria-hidden="true"></div>
+    <h1 class="h-logo" lang="ar">مِرْقاة</h1>
+    <div class="h-line" aria-hidden="true"></div>
+    <p class="h-tag">بوابتك نحو القرار الأكاديمي الصحيح</p>
+    <p class="h-sub">خدمة استشارية حصرية للمدارس الثانوية المتميزة في الأردن</p>
   </div>
 
   <div class="scroll-ind" aria-label="تمرير للأسفل">
-    <div class="si-stem"></div>
+    <div class="stem"></div>
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16L4 8h16z"/></svg>
   </div>
 </section>
 
 <div class="g-rule" aria-hidden="true"></div>
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      ② ABOUT
-════════════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <section id="about" aria-labelledby="about-h">
   <div class="wrap">
-    <p class="eyebrow rv">تعرّف علينا</p>
-    <h2 class="s-heading dark rv d1" id="about-h">ما هي مِرْقاة؟</h2>
-    <div class="orn c rv d2" aria-hidden="true">
-      <div class="ol ol-r"></div>
-      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
-      <div class="ol ol-l"></div>
+    <p class="eyebrow rv">من نحن</p>
+    <h2 class="s-title dark rv d1" id="about-h">من نحن</h2>
+    <div class="orn cr rv d2" aria-hidden="true">
+      <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
     </div>
 
-    <div class="about-grid">
-
-      <!-- Text — RIGHT (first in RTL DOM) -->
-      <div class="about-text rv d1">
-        <div class="accent-bar" aria-hidden="true"></div>
-        <h2 aria-hidden="true" style="display:none">placeholder</h2>
-        <p>مِرْقاة هي خدمة استشارية أكاديمية حصرية، تُقدَّم للمدارس الخاصة المتميزة في عمّان.</p>
-        <p>تعمل مِرْقاة على تجسير الفجوة بين الطالب وقراره الأكاديمي، من خلال جلسات توجيه متخصصة يقدّمها خبراء أكاديميون بخبرات موسّعة في منظومة التعليم العالي الأردني.</p>
-        <p>اسم مِرْقاة مستوحى من معنى "الدرجة" أو "السُّلَّم" — إشارةً إلى أن كل خطوة في مسيرة الطالب هي درجة نحو الأعلى، ودورنا أن نكون تلك الدرجة الثابتة التي يرتكز عليها.</p>
+    <div class="about-body rv d2">
+      <p>تعمل مِرْقاة تحت إشراف مجموعة من المختصين في منظومة التعليم العالي الأردني، والذين شغلوا عدداً من المناصب الهامة ذات العلاقة في هذا المجال. يمتلك هؤلاء المختصون خبرة تتجاوز عشرين عاماً في مجال العمل الجامعي، واللجان الأكاديمية، ويتمتعون بإطلاع مباشر وحصري على أنظمة الثانوية العامة في الأردن في مختلف المسارات الأكاديمية والمهنية، وآليات القبول الجامعي، والسياسات التعليمية.</p>
+      <div class="about-callout rv d3">
+        <p>يتضمن الفريق مسؤولاً حكومياً رفيعاً في منظومة القبول الجامعي الأردني</p>
       </div>
-
-      <!-- Illustration — LEFT (second in RTL DOM) -->
-      <div class="about-illus rv d3">
-        <!-- Ladder motif representing مِرْقاة -->
-        <svg class="ladder" viewBox="0 0 90 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <line x1="20" y1="10" x2="20" y2="110" stroke="#C9A84C" stroke-width=".75" opacity=".38"/>
-          <line x1="70" y1="10" x2="70" y2="110" stroke="#C9A84C" stroke-width=".75" opacity=".38"/>
-          <line x1="20" y1="24"  x2="70" y2="24"  stroke="#C9A84C" stroke-width="1.8" opacity=".92"/>
-          <line x1="20" y1="44"  x2="70" y2="44"  stroke="#C9A84C" stroke-width="1.4" opacity=".72"/>
-          <line x1="20" y1="64"  x2="70" y2="64"  stroke="#C9A84C" stroke-width="1.1" opacity=".52"/>
-          <line x1="20" y1="84"  x2="70" y2="84"  stroke="#C9A84C" stroke-width=".8"  opacity=".35"/>
-          <line x1="20" y1="104" x2="70" y2="104" stroke="#C9A84C" stroke-width=".6"  opacity=".20"/>
-          <polygon points="45,2 49,13 60,13 51,20 55,31 45,24 35,31 39,20 30,13 41,13"
-                   fill="#C9A84C" opacity=".52"/>
-          <rect x="17" y="7"   width="6" height="6" transform="rotate(45 20 10)"  fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".38"/>
-          <rect x="67" y="7"   width="6" height="6" transform="rotate(45 70 10)"  fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".38"/>
-          <rect x="17" y="107" width="6" height="6" transform="rotate(45 20 110)" fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".38"/>
-          <rect x="67" y="107" width="6" height="6" transform="rotate(45 70 110)" fill="none" stroke="#C9A84C" stroke-width=".5" opacity=".38"/>
-        </svg>
-
-        <blockquote class="about-quote" lang="ar">
-          كل خطوة في مسيرة الطالب<br>درجة نحو الأعلى
-        </blockquote>
-      </div>
-
     </div>
   </div>
 </section>
 
 <div class="g-rule" aria-hidden="true"></div>
 
-<!-- ════════════════════════════════════════════
-     ③ PAIN POINTS
-════════════════════════════════════════════ -->
-<section id="pain" aria-labelledby="pain-h">
+<!-- ══════════════════════════════════════════
+     ③ PROBLEMS
+══════════════════════════════════════════ -->
+<section id="problems" aria-labelledby="prob-h">
   <div class="wrap">
-    <p class="eyebrow rv">لماذا مِرْقاة؟</p>
-    <h2 class="s-heading rv d1" id="pain-h">التحديات التي نواجهها معاً</h2>
+    <p class="eyebrow rv">التشخيص</p>
+    <h2 class="s-title rv d1" id="prob-h">لماذا يحتاج الطلاب إلى مِرْقاة؟</h2>
     <div class="orn rv d2" aria-hidden="true">
-      <div class="ol ol-r"></div>
-      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
-      <div class="ol ol-l"></div>
+      <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
     </div>
 
-    <div class="pain-grid">
-      <article class="pain-card rv d1">
-        <span class="pain-num" aria-hidden="true">١</span>
-        <h3>الطالب لا يعرف التخصص الذي يناسبه</h3>
-        <p>قدرات الطالب وطموحاته نادراً ما تجد طريقها إلى قرار أكاديمي مدروس بدون توجيه متخصص وموثوق.</p>
+    <div class="prob-grid">
+      <article class="prob-card rv d1">
+        <span class="prob-num" aria-hidden="true">١</span>
+        <p>كثير من الطلبة لا يملكون القدرة على اختيار المسار المناسب في الثانوية العامة</p>
       </article>
-      <article class="pain-card rv d2">
-        <span class="pain-num" aria-hidden="true">٢</span>
-        <h3>قرارات الأهل تُبنى على معلومات ناقصة</h3>
-        <p>كثير من الأسر تتخذ قرار الجامعة اعتماداً على معلومات قديمة أو غير محدّثة عن التخصصات ومتطلبات القبول.</p>
+      <article class="prob-card rv d2">
+        <span class="prob-num" aria-hidden="true">٢</span>
+        <p>كثير من الطلبة وأولياء الأمور لا يملكون معلومات دقيقة عن أنظمة الثانوية العامة</p>
       </article>
-      <article class="pain-card rv d3">
-        <span class="pain-num" aria-hidden="true">٣</span>
-        <h3>المدرسة تفتقر إلى جهة توجيه موثوقة</h3>
-        <p>تؤدي المدرسة دورها التعليمي بامتياز، غير أنها تحتاج شريكاً متخصصاً يُكمل منظومة التوجيه الأكاديمي.</p>
+      <article class="prob-card rv d3">
+        <span class="prob-num" aria-hidden="true">٣</span>
+        <p>كثير من الطلاب يصلون إلى نهاية المرحلة الثانوية دون فهم حقيقي لخياراتهم الجامعية</p>
       </article>
-      <article class="pain-card rv d4">
-        <span class="pain-num" aria-hidden="true">٤</span>
-        <h3>الفجوة بين الشهادة وسوق العمل</h3>
-        <p>قرار القبول الجامعي هو النقطة التي تبدأ منها هذه الفجوة أو تُعالَج — والاختيار الصحيح يصنع الفارق.</p>
+      <article class="prob-card rv d4">
+        <span class="prob-num" aria-hidden="true">٤</span>
+        <p>كثير من أولياء الأمور لا يجدون قنوات للتواصل مع أسئلتهم وتوجهاتهم</p>
+      </article>
+      <article class="prob-card rv d1">
+        <span class="prob-num" aria-hidden="true">٥</span>
+        <p>أولياء الأمور يعانون من ضبابية المعلومات ويلجؤون إلى مصادر غير موثوقة</p>
+      </article>
+      <article class="prob-card rv d2">
+        <span class="prob-num" aria-hidden="true">٦</span>
+        <p>المعلومات المتاحة للعموم تفتقر إلى التفاعل والإجابة على الأسئلة الفردية</p>
+      </article>
+      <article class="prob-card rv d3" style="grid-column:1 / -1; max-width:50%; margin-right:auto;">
+        <span class="prob-num" aria-hidden="true">٧</span>
+        <p>القرارات الأكاديمية الخاطئة تُكلِّف الأسرة والطالب وقتاً ومالاً وفرصاً ضائعة</p>
       </article>
     </div>
   </div>
@@ -755,52 +634,77 @@
 
 <div class="g-rule" aria-hidden="true"></div>
 
-<!-- ════════════════════════════════════════════
-     ④ BENEFITS
-════════════════════════════════════════════ -->
-<section id="benefits" aria-labelledby="ben-h">
+<!-- ══════════════════════════════════════════
+     ④ WHY MARQAA
+══════════════════════════════════════════ -->
+<section id="why" aria-labelledby="why-h">
   <div class="wrap">
-    <p class="eyebrow rv">ما الذي يتغير؟</p>
-    <h2 class="s-heading dark rv d1" id="ben-h">ماذا يستفيد الطالب؟</h2>
-    <div class="orn c rv d2" aria-hidden="true">
-      <div class="ol ol-r"></div>
-      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
-      <div class="ol ol-l"></div>
+    <p class="eyebrow rv">مزايانا</p>
+    <h2 class="s-title dark rv d1" id="why-h">لماذا مِرْقاة؟</h2>
+    <div class="orn cr rv d2" aria-hidden="true">
+      <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
     </div>
 
-    <div class="ben-grid">
+    <div class="why-list" style="margin-top:2.5rem;">
 
-      <div class="ben-col rv d1">
-        <div class="ben-icon" aria-hidden="true">
-          <!-- Compass / direction -->
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 2a8 8 0 1 1 0 16A8 8 0 0 1 12 4zm3.5 2.5-5 3-1.5 4.5 4.5-1.5 3-5-1-.5zm-1.4 1.4.6.3-2.1 3.5-3.5 1.1 1-3.1 4-1.8z"/>
+      <div class="why-row rv d1">
+        <div class="why-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C9A84C" opacity=".85"/>
           </svg>
         </div>
-        <h3>وضوح في الاتجاه</h3>
-        <p>يخرج الطالب بتصوّر واضح لمساره الأكاديمي والمهني، بدلاً من الضبابية التي تسبق قرار التخصص.</p>
+        <div class="why-text">
+          <strong>المعلومة من مصدرها المباشر</strong>
+          <span>لا وسيط، لا تخمين، لا مصادر غير موثوقة</span>
+        </div>
       </div>
 
-      <div class="ben-col rv d2">
-        <div class="ben-icon" aria-hidden="true">
-          <!-- Document / source -->
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6zm2-5h8v1H8v-1zm0-3h8v1H8v-1zm0-3h4v1H8V9z"/>
+      <div class="why-row rv d2">
+        <div class="why-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C9A84C" opacity=".85"/>
           </svg>
         </div>
-        <h3>معلومات من المصدر</h3>
-        <p>يحصل الطالب على معلومات دقيقة ومحدّثة مباشرةً من خبراء في قلب منظومة التعليم العالي الأردني.</p>
+        <div class="why-text">
+          <strong>خبرة ميدانية حقيقية</strong>
+          <span>تتجاوز عشرين عاماً في صميم منظومة التعليم العالي الأردني والقبول الجامعي</span>
+        </div>
       </div>
 
-      <div class="ben-col rv d3">
-        <div class="ben-icon" aria-hidden="true">
-          <!-- Shield / confidence -->
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18 7 3.12V11c0 4.52-3.02 8.79-7 10.02C8.02 19.79 5 15.52 5 11V6.3l7-3.12zM16.59 8 11 13.59l-3.59-3.6L6 11.41 11 16.4l7-7-1.41-1.4z"/>
+      <div class="why-row rv d3">
+        <div class="why-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C9A84C" opacity=".85"/>
           </svg>
         </div>
-        <h3>ثقة في القرار</h3>
-        <p>يتخذ الطالب وأهله قرارهم الأكاديمي بثقة وعلى أسس سليمة، بعيداً عن التخمين أو الضغط الاجتماعي.</p>
+        <div class="why-text">
+          <strong>تفاعل مباشر ومفتوح</strong>
+          <span>الطلاب وأولياء الأمور يسألون ويتلقون إجابات دقيقة ومتخصصة</span>
+        </div>
+      </div>
+
+      <div class="why-row rv d4">
+        <div class="why-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C9A84C" opacity=".85"/>
+          </svg>
+        </div>
+        <div class="why-text">
+          <strong>خدمة حصرية</strong>
+          <span>لعدد محدود من المدارس المتميزة فقط</span>
+        </div>
+      </div>
+
+      <div class="why-row rv d5">
+        <div class="why-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C9A84C" opacity=".85"/>
+          </svg>
+        </div>
+        <div class="why-text">
+          <strong>تغطية شاملة</strong>
+          <span>المناهج الوطنية والدولية للثانوية العامة على حدٍّ سواء</span>
+        </div>
       </div>
 
     </div>
@@ -809,226 +713,427 @@
 
 <div class="g-rule" aria-hidden="true"></div>
 
-<!-- ════════════════════════════════════════════
-     ⑤ EXPERTS
-════════════════════════════════════════════ -->
-<section id="experts" aria-labelledby="exp-h">
-  <div class="wrap">
-    <p class="eyebrow rv">من نحن؟</p>
-    <h2 class="s-heading rv d1" id="exp-h">خبراؤنا</h2>
-    <div class="orn rv d2" aria-hidden="true">
-      <div class="ol ol-r"></div>
-      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
-      <div class="ol ol-l"></div>
-    </div>
-
-    <p class="experts-intro rv d2">
-      تعتمد مِرْقاة على نخبة من الخبراء الأكاديميين والإداريين الذين أمضوا أكثر من عشرين عاماً في قلب منظومة التعليم العالي الأردني. يشغل خبراؤنا مناصب قيادية في وزارات حكومية وجامعات أردنية معتمدة، وهم متحدثون أكاديميون معتمدون على المستوى الوطني.
-    </p>
-
-    <div class="pillars">
-      <div class="pillar rv d1">
-        <div class="pillar-ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3 1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-        </div>
-        <h3>خبرة أكاديمية وإدارية</h3>
-        <p>أكثر من عشرين عاماً في التعليم العالي، توجيه أكاديمي، وإدارة مؤسسية على المستوى الوطني.</p>
-      </div>
-      <div class="pillar rv d2">
-        <div class="pillar-ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
-        </div>
-        <h3>مناصب حكومية وجامعية</h3>
-        <p>حضور فعلي في وزارات ومؤسسات أكاديمية رسمية، مما يضمن دقة المعلومات ومصداقيتها.</p>
-      </div>
-      <div class="pillar rv d3">
-        <div class="pillar-ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
-        </div>
-        <h3>متحدثون أكاديميون وطنيون</h3>
-        <p>حضور موثّق في مؤتمرات ومنتديات التعليم العالي، وصوت مسموع في النقاش الأكاديمي الوطني.</p>
-      </div>
-    </div>
-
-    <p class="expert-disc rv d3" lang="ar">
-      تُكشَف هويات الخبراء عند التوقيع على اتفاقية الشراكة
-    </p>
-  </div>
-</section>
-
-<div class="g-rule" aria-hidden="true"></div>
-
-<!-- ════════════════════════════════════════════
-     ⑥ SERVICES
-════════════════════════════════════════════ -->
-<section id="services" aria-labelledby="svc-h">
+<!-- ══════════════════════════════════════════
+     ⑤ SESSIONS
+══════════════════════════════════════════ -->
+<section id="sessions" aria-labelledby="sess-h">
   <div class="wrap">
     <p class="eyebrow rv">ما نقدمه</p>
-    <h2 class="s-heading dark rv d1" id="svc-h">خدماتنا الاستشارية</h2>
-    <div class="orn c rv d2" aria-hidden="true">
-      <div class="ol ol-r"></div>
-      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
-      <div class="ol ol-l"></div>
+    <h2 class="s-title rv d1" id="sess-h">الجلسات المقدَّمة</h2>
+    <p class="sess-sub rv d2">خمس جلسات متخصصة — لكل فئة ما يناسبها</p>
+
+    <div class="orn rv d2" aria-hidden="true">
+      <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
     </div>
 
-    <div class="svc-grid">
-      <article class="svc-card rv d1">
-        <span class="svc-tag" aria-hidden="true">خدمة ١</span>
-        <h3>التوجيه الأكاديمي الجماعي</h3>
-        <p>جلسات توجيه تُعقد داخل المدرسة للطلاب وأولياء الأمور، تُغطي مسارات القبول الجامعي والتخصصات والفرص الأكاديمية المتاحة.</p>
-      </article>
-      <article class="svc-card rv d2">
-        <span class="svc-tag" aria-hidden="true">خدمة ٢</span>
-        <h3>ورش العمل المتخصصة</h3>
-        <p>برامج تفاعلية مصمَّمة لمعالجة تحديات محددة في التوجيه الأكاديمي والمهني، وتنمية وعي الطالب بخياراته.</p>
-      </article>
-      <article class="svc-card rv d3">
-        <span class="svc-tag" aria-hidden="true">خدمة ٣</span>
-        <h3>الاستشارات الفردية</h3>
-        <p>جلسات مخصصة للحالات التي تحتاج توجيهاً أعمق وعناية فردية مركّزة، تُنظَّم عبر المدرسة وبتنسيق كامل معها.</p>
-      </article>
+    <div class="sess-cards rv d3">
+
+      <!-- Card 1 -->
+      <div class="sess-card" role="button" aria-expanded="false">
+        <div class="sess-header">
+          <span class="sess-grade">الصف التاسع</span>
+          <span class="sess-type">جلسة توجيهية</span>
+          <span class="sess-dur">٢–٣ ساعات</span>
+          <svg class="sess-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="sess-body">
+          <div class="sess-detail">
+            <dl class="sess-dl">
+              <dt>الوصف</dt>
+              <dd>توجيه الطالب نحو اختيار المسار والحقل المناسب بما يتوافق مع قدراته وتطلعاته</dd>
+            </dl>
+            <dl class="sess-dl">
+              <dt>النتيجة المتوقعة</dt>
+              <dd>قرار واضح ومدروس في اختيار المسار الأكاديمي أو المهني</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="sess-card" role="button" aria-expanded="false">
+        <div class="sess-header">
+          <span class="sess-grade">الصف العاشر والحادي عشر</span>
+          <span class="sess-type">جلسة تثقيفية</span>
+          <span class="sess-dur">٢–٣ ساعات</span>
+          <svg class="sess-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="sess-body">
+          <div class="sess-detail">
+            <dl class="sess-dl">
+              <dt>الوصف</dt>
+              <dd>تثقيف الطالب حول منظومة القبول الجامعي الموحد وآلياته ومتطلباته</dd>
+            </dl>
+            <dl class="sess-dl">
+              <dt>النتيجة المتوقعة</dt>
+              <dd>وعي مبكر يُمكّن الطالب من التخطيط الصحيح قبل الصف الثاني عشر</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="sess-card" role="button" aria-expanded="false">
+        <div class="sess-header">
+          <span class="sess-grade">الصف الثاني عشر</span>
+          <span class="sess-type">جلسة إرشادية متخصصة</span>
+          <span class="sess-dur">٢–٣ ساعات</span>
+          <svg class="sess-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="sess-body">
+          <div class="sess-detail">
+            <dl class="sess-dl">
+              <dt>الوصف</dt>
+              <dd>إرشاد الطالب (وطني / دولي) حول الجامعات والتخصصات والمعدلات وآليات القبول داخل وخارج المملكة</dd>
+            </dl>
+            <dl class="sess-dl">
+              <dt>النتيجة المتوقعة</dt>
+              <dd>خارطة طريق كاملة لخيارات القبول الجامعي</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="sess-card" role="button" aria-expanded="false">
+        <div class="sess-header">
+          <span class="sess-grade">أولياء الأمور</span>
+          <span class="sess-type">أمسية تثقيفية</span>
+          <span class="sess-dur">٢–٣ ساعات</span>
+          <svg class="sess-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="sess-body">
+          <div class="sess-detail">
+            <dl class="sess-dl">
+              <dt>الوصف</dt>
+              <dd>جلسة لأولياء الأمور لفهم منظومة الثانوية العامة والقبول الجامعي والتخطيط المشترك</dd>
+            </dl>
+            <dl class="sess-dl">
+              <dt>النتيجة المتوقعة</dt>
+              <dd>فهم شامل وأدوات عملية للتخطيط الأكاديمي مع الأبناء</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="sess-card" role="button" aria-expanded="false">
+        <div class="sess-header">
+          <span class="sess-grade">الموجهون والعاملون</span>
+          <span class="sess-type">جلسة تأهيلية</span>
+          <span class="sess-dur">٢–٣ ساعات</span>
+          <svg class="sess-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="sess-body">
+          <div class="sess-detail">
+            <dl class="sess-dl">
+              <dt>الوصف</dt>
+              <dd>جلسة متخصصة للمرشدين التربويين والكادر التعليمي حول مستجدات القبول الجامعي</dd>
+            </dl>
+            <dl class="sess-dl">
+              <dt>النتيجة المتوقعة</dt>
+              <dd>رؤية شاملة محدّثة وأدوات تطبيقية قابلة للاستخدام داخل المدرسة</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+    <p class="sess-note rv d4">تفاصيل المحاور والمواضيع المقترحة لكل فئة متاحة عند الطلب</p>
   </div>
 </section>
 
 <div class="g-rule" aria-hidden="true"></div>
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
+     ⑥ TOPICS
+══════════════════════════════════════════ -->
+<section id="topics" aria-labelledby="top-h">
+  <div class="wrap">
+    <p class="eyebrow rv">ما نغطيه</p>
+    <h2 class="s-title dark rv d1" id="top-h">ما الذي يتناوله خبراؤنا؟</h2>
+    <div class="orn cr rv d2" aria-hidden="true">
+      <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
+    </div>
+
+    <p class="topics-intro rv d2">مواضيع لا تتوفر في مكان واحد بهذا المستوى من الدقة والشمولية في المملكة الأردنية الهاشمية</p>
+
+    <div class="accordion rv d3" role="list">
+
+      <div class="acc-item" role="listitem">
+        <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
+          <span class="acc-title">مسارات الثانوية العامة</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="acc-body">
+          <p class="acc-content">المسار الأكاديمي والمهني، الجامعات والكليات الرسمية والخاصة، كليات الطيران والطهي والفندقة</p>
+        </div>
+      </div>
+
+      <div class="acc-item" role="listitem">
+        <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
+          <span class="acc-title">منظومة القبول الجامعي الموحد</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="acc-body">
+          <p class="acc-content">الجامعات المشمولة بالقبول الموحد، آليات القبول للمناهج الأردنية والأجنبية (بريطاني، أمريكي، IB)</p>
+        </div>
+      </div>
+
+      <div class="acc-item" role="listitem">
+        <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
+          <span class="acc-title">فئات القبول الخاصة</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="acc-body">
+          <p class="acc-content">مكرمة الجيش، مكرمة المعلمين، التفوق الرياضي والفني، ذوو الإعاقة، مرضى السرطان، وغيرها</p>
+        </div>
+      </div>
+
+      <div class="acc-item" role="listitem">
+        <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
+          <span class="acc-title">البرنامج الموازي والدولي</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="acc-body">
+          <p class="acc-content">آليات القبول الموازي، الطالب الأردني مزدوج الجنسية، أبناء الأردنيات المتزوجات من غير الأردنيين</p>
+        </div>
+      </div>
+
+      <div class="acc-item" role="listitem">
+        <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
+          <span class="acc-title">درجة الدبلوم المتوسط</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="acc-body">
+          <p class="acc-content">القبول، التجسير، إلغاء الامتحان الشامل والبدائل عنه</p>
+        </div>
+      </div>
+
+      <div class="acc-item" role="listitem">
+        <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
+          <span class="acc-title">الدراسة خارج الأردن</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="acc-body">
+          <p class="acc-content">الشروط والتعليمات، البعثات والمنح الخارجية، وكالات التسجيل</p>
+        </div>
+      </div>
+
+      <div class="acc-item" role="listitem">
+        <div class="acc-header" role="button" aria-expanded="false" tabindex="0">
+          <span class="acc-title">ما بعد القبول</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="acc-body">
+          <p class="acc-content">الانتقال بين التخصصات والجامعات</p>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="topics-note rv d4">
+      تختار المدرسة المواضيع التي تناسب وقت الجلسة واحتياجات طلابها، مع إمكانية تخصيص أكثر من جلسة للتغطية الكاملة.
+    </p>
+  </div>
+</section>
+
+<div class="g-rule" aria-hidden="true"></div>
+
+<!-- ══════════════════════════════════════════
      ⑦ EXCLUSIVITY
-════════════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <section id="exclusivity" aria-labelledby="excl-h">
   <div class="wrap">
 
-    <div class="excl-rule rv" aria-hidden="true"></div>
+    <div style="width:320px;max-width:90%;height:1px;background:linear-gradient(to left,transparent,var(--gold),transparent);margin:0 auto 1rem;" aria-hidden="true"></div>
 
-    <h2 class="excl-headline rv d1" id="excl-h" lang="ar">لَسْنَا لِلْجَمِيعِ — نَحْنُ لِمَنْ يَسْتَحِق</h2>
+    <h2 class="excl-headline rv d1" id="excl-h">لا نتعاون مع جميع المدارس</h2>
+    <p class="excl-sub rv d2">نختار شركاءنا بعناية لضمان جودة الخدمة وحصريتها</p>
 
-    <div class="excl-body rv d2">
-      <p>تعمل مِرْقاة مع <strong>عدد محدود من المدارس سنوياً</strong>، وفق معايير انتقاء دقيقة تضمن جودة الأثر.</p>
-      <p>لا نُعلن عن خدماتنا للعموم — <strong>التواصل يكون بالدعوة المباشرة فقط</strong>.</p>
-      <p>شراكتنا مع مدرستك تعني أننا نُعطيها الاهتمام الكامل الذي تستحقه — لا اشتراكات جماعية، ولا جهود مشتّتة.</p>
+    <div class="excl-cards">
+
+      <div class="excl-card rv d2">
+        <div class="excl-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+          </svg>
+        </div>
+        <h3>عدد محدود</h3>
+        <p>لا يتجاوز عدد المدارس الشريكة عشر مدارس سنوياً</p>
+      </div>
+
+      <div class="excl-card rv d3">
+        <div class="excl-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+        <h3>بالدعوة فقط</h3>
+        <p>لا نُعلن عن خدماتنا للعموم، التواصل بالدعوة المباشرة</p>
+      </div>
+
+      <div class="excl-card rv d4">
+        <div class="excl-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18 7 3.12V11c0 4.52-3.02 8.79-7 10.02C8.02 19.79 5 15.52 5 11V6.3l7-3.12z"/>
+          </svg>
+        </div>
+        <h3>الاهتمام الكامل</h3>
+        <p>شراكتنا معك تعني أننا نمنحك الأولوية والتركيز الكامل</p>
+      </div>
+
     </div>
 
-    <div class="excl-rule rv d3" style="margin-top:3rem" aria-hidden="true"></div>
+    <div style="width:320px;max-width:90%;height:1px;background:linear-gradient(to left,transparent,var(--gold),transparent);margin:3rem auto 0;" aria-hidden="true"></div>
 
   </div>
 </section>
 
 <div class="g-rule" aria-hidden="true"></div>
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      ⑧ CONTACT
-════════════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <section id="contact" aria-labelledby="cta-h">
-  <div class="contact-inner">
+  <div class="wrap" style="max-width:540px;">
     <p class="eyebrow rv">تواصل معنا</p>
-    <h2 class="s-heading rv d1" id="cta-h">للتواصل والاستفسار</h2>
-    <div class="orn c rv d2" aria-hidden="true">
-      <div class="ol ol-r"></div>
-      <div class="od sm"></div><div class="od"></div><div class="od sm"></div>
-      <div class="ol ol-l"></div>
+    <h2 class="s-title dark rv d1" id="cta-h">للتواصل والاستفسار</h2>
+    <div class="orn cr rv d2" aria-hidden="true">
+      <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
     </div>
 
-    <a href="https://wa.me/96200000000"
-       class="wa-btn rv d2"
-       aria-label="تواصل مع مِرْقاة عبر واتساب"
-       rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-      </svg>
-      تواصل عبر واتساب
-    </a>
-
-    <p class="contact-note rv d3">التواصل مخصص للمدارس المدعوّة فقط</p>
+    <div style="text-align:center;">
+      <a href="https://wa.me/96200000000"
+         class="wa-btn rv d2"
+         aria-label="تواصل مع مِرْقاة عبر واتساب"
+         rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+        </svg>
+        تواصل عبر واتساب
+      </a>
+      <p class="cta-note rv d3">التواصل مخصص للمدارس المدعوّة فقط</p>
+    </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      ⑨ FOOTER
-════════════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <footer>
   <div class="g-rule" aria-hidden="true"></div>
   <div class="footer-inner">
     <p class="footer-logo" lang="ar">مِرْقاة</p>
+    <p class="footer-desc">مِرْقاة للاستشارات الجامعية والتوجيه الأكاديمي</p>
+    <p class="footer-desc">عمّان — المملكة الأردنية الهاشمية</p>
     <p class="footer-copy">© 2025 مِرْقاة — جميع الحقوق محفوظة</p>
   </div>
 </footer>
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      JAVASCRIPT
-════════════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <script>
-  /* ── Gold Particle System ───────────────────────── */
-  (function () {
-    const canvas = document.getElementById('hero-canvas');
-    const ctx    = canvas.getContext('2d');
-    let W, H, pts = [];
+/* ── Gold Particle System ───────────────── */
+(function () {
+  const cvs = document.getElementById('hero-canvas');
+  const ctx = cvs.getContext('2d');
+  let W, H, pts = [];
 
-    function resize() {
-      W = canvas.width  = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
+  function resize() { W = cvs.width = cvs.offsetWidth; H = cvs.height = cvs.offsetHeight; }
+
+  class P {
+    constructor() { this.reset(true); }
+    reset(rand) {
+      this.x    = Math.random() * W;
+      this.y    = rand ? Math.random() * H : H + 2;
+      this.r    = Math.random() * 1.3 + .2;
+      this.vx   = (Math.random() - .5) * .25;
+      this.vy   = -(Math.random() * .35 + .1);
+      this.a    = Math.random() * .45 + .07;
+      this.life = 0;
+      this.max  = Math.random() * 200 + 90;
     }
-
-    class P {
-      constructor() { this.reset(true); }
-      reset(rand) {
-        this.x    = Math.random() * W;
-        this.y    = rand ? Math.random() * H : H + 2;
-        this.r    = Math.random() * 1.35 + .2;
-        this.vx   = (Math.random() - .5) * .26;
-        this.vy   = -(Math.random() * .36 + .1);
-        this.a    = Math.random() * .46 + .07;
-        this.life = 0;
-        this.max  = Math.random() * 210 + 90;
-      }
-      tick() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (++this.life > this.max || this.y < -4) this.reset(false);
-      }
-      draw() {
-        const t = this.life / this.max;
-        const a = Math.max(0, this.a * (1 - Math.pow(t * 2 - 1, 2)));
-        ctx.globalAlpha = a;
-        ctx.fillStyle   = '#C9A84C';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
+    tick() { this.x += this.vx; this.y += this.vy; if (++this.life > this.max || this.y < -4) this.reset(false); }
+    draw() {
+      const t = this.life / this.max;
+      ctx.globalAlpha = Math.max(0, this.a * (1 - Math.pow(t * 2 - 1, 2)));
+      ctx.fillStyle = '#C9A84C';
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); ctx.fill();
     }
+  }
 
-    function init() {
-      resize();
-      pts = Array.from({ length: 70 }, () => {
-        const p = new P();
-        p.life = Math.floor(Math.random() * p.max);
-        return p;
-      });
-    }
+  function init() {
+    resize();
+    pts = Array.from({ length: 68 }, () => { const p = new P(); p.life = Math.floor(Math.random() * p.max); return p; });
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H); ctx.globalAlpha = 1;
+    pts.forEach(p => { p.tick(); p.draw(); }); ctx.globalAlpha = 1;
+    requestAnimationFrame(loop);
+  }
+  window.addEventListener('resize', resize);
+  init(); loop();
+})();
 
-    function loop() {
-      ctx.clearRect(0, 0, W, H);
-      ctx.globalAlpha = 1;
-      pts.forEach(p => { p.tick(); p.draw(); });
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(loop);
-    }
+/* ── Scroll Reveal ──────────────────────── */
+(function () {
+  const io = new IntersectionObserver(
+    es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }),
+    { threshold: .1, rootMargin: '0px 0px -28px 0px' }
+  );
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+})();
 
-    window.addEventListener('resize', resize);
-    init();
-    loop();
-  })();
+/* ── Session Accordion ──────────────────── */
+document.querySelectorAll('.sess-card').forEach(card => {
+  card.querySelector('.sess-header').addEventListener('click', function () {
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.sess-card.open').forEach(c => {
+      c.classList.remove('open');
+      c.setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) { card.classList.add('open'); card.setAttribute('aria-expanded', 'true'); }
+  });
+});
 
-  /* ── Intersection Observer — Scroll Reveal ──────── */
-  (function () {
-    const io = new IntersectionObserver(
-      entries => entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
-      }),
-      { threshold: .1, rootMargin: '0px 0px -30px 0px' }
-    );
-    document.querySelectorAll('.rv').forEach(el => io.observe(el));
-  })();
+/* ── Topics Accordion ───────────────────── */
+document.querySelectorAll('.acc-header').forEach(header => {
+  function toggle() {
+    const item   = header.closest('.acc-item');
+    const isOpen = item.classList.contains('open');
+    item.classList.toggle('open', !isOpen);
+    header.setAttribute('aria-expanded', String(!isOpen));
+  }
+  header.addEventListener('click', toggle);
+  header.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+});
 </script>
 </body>
 </html>
