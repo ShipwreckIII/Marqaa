@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
 
 /* ═══════════════════════════════════════════════
@@ -24,6 +25,7 @@
   --gold-a45:   rgba(201,168,76,.45);
   --f-disp:     'Amiri', serif;
   --f-body:     'Tajawal', sans-serif;
+  --nav-h:      74px;
 }
 
 /* ═══════════════════════════════════════════════
@@ -45,7 +47,98 @@ body {
    LAYOUT HELPERS
 ═══════════════════════════════════════════════ */
 .wrap { max-width:1140px; margin:0 auto; padding:0 2rem; }
-section { padding:96px 0; }
+section { padding:96px 0; scroll-margin-top:var(--nav-h); }
+
+/* ═══════════════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════════════ */
+.site-nav {
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  z-index:30;
+  backdrop-filter:blur(12px);
+  background:linear-gradient(to left,rgba(13,31,60,.92),rgba(13,31,60,.82));
+  border-bottom:1px solid rgba(201,168,76,.2);
+}
+.site-nav-inner {
+  min-height:var(--nav-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+}
+.site-nav-brand {
+  color:var(--gold);
+  font-family:var(--f-disp);
+  font-size:1.5rem;
+  letter-spacing:.04em;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.site-nav-list {
+  list-style:none;
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.site-nav-link {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:rgba(245,240,232,.84);
+  font-family:var(--f-body);
+  font-size:.98rem;
+  font-weight:600;
+  padding:.52rem .95rem;
+  border:1px solid transparent;
+  transition:color .22s, background .22s, border-color .22s, transform .22s;
+}
+.site-nav-link:hover {
+  color:var(--gold-m);
+  border-color:rgba(201,168,76,.3);
+  background:rgba(201,168,76,.06);
+  transform:translateY(-1px);
+}
+.site-nav-link.active {
+  color:var(--navy);
+  background:var(--gold);
+  border-color:var(--gold);
+}
+.site-nav-toggle {
+  display:none;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(201,168,76,.4);
+  background:rgba(201,168,76,.08);
+  color:var(--gold-m);
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.site-nav-toggle span {
+  display:block;
+  width:18px;
+  height:2px;
+  background:currentColor;
+  position:relative;
+}
+.site-nav-toggle span::before,
+.site-nav-toggle span::after {
+  content:"";
+  position:absolute;
+  right:0;
+  width:18px;
+  height:2px;
+  background:currentColor;
+}
+.site-nav-toggle span::before { top:-6px; }
+.site-nav-toggle span::after { top:6px; }
+#hero { scroll-margin-top:0; }
 
 /* ═══════════════════════════════════════════════
    SECTION HEADER
@@ -86,19 +179,6 @@ section { padding:96px 0; }
 .orn.cr .ds { background:rgba(13,31,60,.3); }
 .orn.cr .lr { background:linear-gradient(to left, transparent,rgba(13,31,60,.4)); }
 .orn.cr .ll { background:linear-gradient(to right,transparent,rgba(13,31,60,.4)); }
-
-/* ═══════════════════════════════════════════════
-   SCROLL REVEAL
-═══════════════════════════════════════════════ */
-.rv {
-  opacity:0; transform:translateY(30px);
-  transition: opacity .8s cubic-bezier(.22,.68,0,1.1),
-              transform .8s cubic-bezier(.22,.68,0,1.1);
-}
-.rv.on { opacity:1; transform:translateY(0); }
-.d1{transition-delay:.07s} .d2{transition-delay:.15s}
-.d3{transition-delay:.23s} .d4{transition-delay:.31s}
-.d5{transition-delay:.39s}
 
 /* ═══════════════════════════════════════════════
    KEYFRAMES
@@ -558,8 +638,37 @@ footer {
    RESPONSIVE
 ═══════════════════════════════════════════════ */
 @media (max-width:768px) {
+  :root { --nav-h:66px; }
   section { padding:70px 0; }
   .wrap { padding:0 1.25rem; }
+  .site-nav-inner {
+    justify-content:space-between;
+    padding:0;
+  }
+  .site-nav-toggle { display:inline-flex; }
+  .site-nav-list {
+    position:absolute;
+    top:calc(var(--nav-h) - 1px);
+    right:1.25rem;
+    left:1.25rem;
+    display:none;
+    flex-direction:column;
+    align-items:stretch;
+    gap:.35rem;
+    padding:.8rem;
+    border:1px solid rgba(201,168,76,.24);
+    background:rgba(13,31,60,.98);
+  }
+  .site-nav.open .site-nav-list {
+    display:flex;
+  }
+  .site-nav-link {
+    white-space:normal;
+    width:100%;
+    font-size:.9rem;
+    padding:.45rem .8rem;
+    justify-content:flex-start;
+  }
   .h-logo { font-size:5.5rem; }
   .prob-grid { grid-template-columns:1fr; }
   .prob-card--last { width:100%; justify-self:stretch; }
@@ -584,6 +693,24 @@ footer {
   </style>
 </head>
 <body>
+<nav class="site-nav" aria-label="التنقل بين الأقسام">
+  <div class="wrap site-nav-inner">
+    <a href="#hero" class="site-nav-brand" lang="ar">مِرْقاة</a>
+    <button class="site-nav-toggle" type="button" aria-label="فتح القائمة" aria-expanded="false" aria-controls="site-nav-list">
+      <span aria-hidden="true"></span>
+    </button>
+    <ul class="site-nav-list" id="site-nav-list">
+      <li><a class="site-nav-link active" href="#hero">الرئيسية</a></li>
+      <li><a class="site-nav-link" href="#about">من نحن</a></li>
+      <li><a class="site-nav-link" href="#problems">التحديات</a></li>
+      <li><a class="site-nav-link" href="#why">لماذا مرقاة</a></li>
+      <li><a class="site-nav-link" href="#sessions">الجلسات</a></li>
+      <li><a class="site-nav-link" href="#topics">المواضيع</a></li>
+      <li><a class="site-nav-link" href="#exclusivity">الخصوصية</a></li>
+      <li><a class="site-nav-link" href="#contact">التواصل</a></li>
+    </ul>
+  </div>
+</nav>
 
 <!-- ══════════════════════════════════════════
      ① HERO
@@ -614,14 +741,14 @@ footer {
 ══════════════════════════════════════════ -->
 <section id="about" aria-labelledby="about-h">
   <div class="wrap">
-    <h2 class="s-title dark rv d1" id="about-h">من نحن</h2>
-    <div class="orn cr rv d2" aria-hidden="true">
+    <h2 class="s-title dark" data-aos="fade-up" data-aos-delay="70" id="about-h">من نحن</h2>
+    <div class="orn cr" data-aos="fade-up" data-aos-delay="150" aria-hidden="true">
       <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
     </div>
 
-    <div class="about-body rv d2">
+    <div class="about-body" data-aos="fade-up" data-aos-delay="150">
       <p>تأسست مِرْقاة على يد مجموعة من المختصين الذين شغلوا مناصب هامة في منظومة التعليم العالي الأردني. يمتلك هؤلاء المختصون خبرة تتجاوز عشرين عاماً في مجال العمل الجامعي، واللجان الأكاديمية، واكتسبوا اطلاعاً عميقاً على أنظمة الثانوية العامة في الأردن في مختلف المسارات الأكاديمية والمهنية، وآليات القبول الجامعي، والسياسات التعليمية.</p>
-      <div class="about-callout rv d3">
+      <div class="about-callout" data-aos="fade-up" data-aos-delay="230">
         <p>يضم فريق مِرْقاة خبراء عملوا في منظومة القبول الجامعي الموحد في الأردن</p>
       </div>
     </div>
@@ -635,31 +762,31 @@ footer {
 ══════════════════════════════════════════ -->
 <section id="problems" aria-labelledby="prob-h">
   <div class="wrap">
-    <h2 class="s-title rv d1" id="prob-h">لماذا يحتاج الطلاب إلى مِرْقاة؟</h2>
-    <div class="orn rv d2" aria-hidden="true">
+    <h2 class="s-title" data-aos="fade-up" data-aos-delay="70" id="prob-h">لماذا يحتاج الطلاب إلى مِرْقاة؟</h2>
+    <div class="orn" data-aos="fade-up" data-aos-delay="150" aria-hidden="true">
       <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
     </div>
 
     <div class="prob-grid">
-      <article class="prob-card rv d1">
+      <article class="prob-card" data-aos="fade-left" data-aos-duration="800">
         <p>كثير من الطلبة لا يملكون القدرة على اختيار المسار المناسب في الثانوية العامة</p>
       </article>
-      <article class="prob-card rv d2">
+      <article class="prob-card" data-aos="fade-right" data-aos-duration="800">
         <p>كثير من الطلبة وأولياء الأمور لا يملكون معلومات دقيقة عن أنظمة الثانوية العامة</p>
       </article>
-      <article class="prob-card rv d3">
+      <article class="prob-card" data-aos="fade-left" data-aos-duration="800">
         <p>كثير من الطلاب يصلون إلى نهاية المرحلة الثانوية دون فهم حقيقي لخياراتهم الجامعية</p>
       </article>
-      <article class="prob-card rv d4">
+      <article class="prob-card" data-aos="fade-right" data-aos-duration="800">
         <p>كثير من أولياء الأمور لا يجدون قنوات للتواصل مع أسئلتهم وتوجهاتهم</p>
       </article>
-      <article class="prob-card rv d1">
+      <article class="prob-card" data-aos="fade-left" data-aos-duration="800">
         <p>أولياء الأمور يعانون من ضبابية المعلومات ويلجؤون إلى مصادر غير موثوقة</p>
       </article>
-      <article class="prob-card rv d2">
+      <article class="prob-card" data-aos="fade-right" data-aos-duration="800">
         <p>المعلومات المتاحة للعموم تفتقر إلى التفاعل والإجابة على الأسئلة الفردية</p>
       </article>
-      <article class="prob-card prob-card--last rv d3">
+      <article class="prob-card prob-card--last" data-aos="fade-left" data-aos-duration="800">
         <p>القرارات الأكاديمية الخاطئة تُكلِّف الأسرة والطالب وقتاً ومالاً وفرصاً ضائعة</p>
       </article>
     </div>
@@ -673,14 +800,14 @@ footer {
 ══════════════════════════════════════════ -->
 <section id="why" aria-labelledby="why-h">
   <div class="wrap">
-    <h2 class="s-title dark rv d1" id="why-h">لماذا مِرْقاة؟</h2>
-    <div class="orn cr rv d2" aria-hidden="true">
+    <h2 class="s-title dark" data-aos="fade-up" data-aos-delay="70" id="why-h">لماذا مِرْقاة؟</h2>
+    <div class="orn cr" data-aos="fade-up" data-aos-delay="150" aria-hidden="true">
       <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
     </div>
 
     <div class="why-list" style="margin-top:2.5rem;">
 
-      <div class="why-row rv d1">
+      <div class="why-row" data-aos="fade-up" data-aos-delay="70">
         <div class="why-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C9A84C" opacity=".85"/>
@@ -692,7 +819,7 @@ footer {
         </div>
       </div>
 
-      <div class="why-row rv d2">
+      <div class="why-row" data-aos="fade-up" data-aos-delay="150">
         <div class="why-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C9A84C" opacity=".85"/>
@@ -704,7 +831,7 @@ footer {
         </div>
       </div>
 
-      <div class="why-row rv d3">
+      <div class="why-row" data-aos="fade-up" data-aos-delay="230">
         <div class="why-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C9A84C" opacity=".85"/>
@@ -716,7 +843,7 @@ footer {
         </div>
       </div>
 
-      <div class="why-row rv d4">
+      <div class="why-row" data-aos="fade-up" data-aos-delay="310">
         <div class="why-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C9A84C" opacity=".85"/>
@@ -728,7 +855,7 @@ footer {
         </div>
       </div>
 
-      <div class="why-row rv d5">
+      <div class="why-row" data-aos="fade-up" data-aos-delay="390">
         <div class="why-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C9A84C" opacity=".85"/>
@@ -751,14 +878,14 @@ footer {
 ══════════════════════════════════════════ -->
 <section id="sessions" aria-labelledby="sess-h">
   <div class="wrap">
-    <h2 class="s-title rv d1" id="sess-h">الجلسات المقدَّمة</h2>
-    <p class="sess-sub rv d2">خمس جلسات متخصصة — لكل فئة ما يناسبها</p>
+    <h2 class="s-title" data-aos="fade-up" data-aos-delay="70" id="sess-h">الجلسات المقدَّمة</h2>
+    <p class="sess-sub" data-aos="fade-up" data-aos-delay="150">خمس جلسات متخصصة — لكل فئة ما يناسبها</p>
 
-    <div class="orn rv d2" aria-hidden="true">
+    <div class="orn" data-aos="fade-up" data-aos-delay="150" aria-hidden="true">
       <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
     </div>
 
-    <div class="sess-cards rv d3">
+    <div class="sess-cards" data-aos="fade-up" data-aos-delay="230">
 
       <!-- Card 1 -->
       <div class="sess-card" role="button" aria-expanded="false">
@@ -882,7 +1009,7 @@ footer {
 
     </div>
 
-    <p class="sess-followup rv d4">تتبع الجلسة جلسة نقاشية لمدة ساعة مخصصة للأسئلة والاستفسارات.</p>
+    <p class="sess-followup" data-aos="fade-up" data-aos-delay="310">تتبع الجلسة جلسة نقاشية لمدة ساعة مخصصة للأسئلة والاستفسارات.</p>
   </div>
 </section>
 
@@ -893,14 +1020,14 @@ footer {
 ══════════════════════════════════════════ -->
 <section id="topics" aria-labelledby="top-h">
   <div class="wrap">
-    <h2 class="s-title dark rv d1" id="top-h">ما الذي يتناوله خبراؤنا؟</h2>
-    <div class="orn cr rv d2" aria-hidden="true">
+    <h2 class="s-title dark" data-aos="fade-up" data-aos-delay="70" id="top-h">ما الذي يتناوله خبراؤنا؟</h2>
+    <div class="orn cr" data-aos="fade-up" data-aos-delay="150" aria-hidden="true">
       <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
     </div>
 
-    <p class="topics-intro rv d2">مواضيع لا تتوفر في مكان واحد بهذا المستوى من الدقة والشمولية في المملكة الأردنية الهاشمية</p>
+    <p class="topics-intro" data-aos="fade-up" data-aos-delay="150">مواضيع لا تتوفر في مكان واحد بهذا المستوى من الدقة والشمولية في المملكة الأردنية الهاشمية</p>
 
-    <div class="accordion rv d3" role="list">
+    <div class="accordion" data-aos="fade-up" data-aos-delay="230" role="list">
 
       <!-- Cluster 1 -->
       <div class="acc-item" role="listitem">
@@ -1030,7 +1157,7 @@ footer {
 
     </div>
 
-    <p class="topics-note rv d4">
+    <p class="topics-note" data-aos="fade-up" data-aos-delay="310">
       تختار المدرسة المواضيع التي تناسب وقت الجلسة واحتياجات طلابها، مع إمكانية تخصيص أكثر من جلسة للتغطية الكاملة.
     </p>
   </div>
@@ -1046,12 +1173,12 @@ footer {
 
     <div style="width:320px;max-width:90%;height:1px;background:linear-gradient(to left,transparent,var(--gold),transparent);margin:0 auto 1rem;" aria-hidden="true"></div>
 
-    <h2 class="excl-headline rv d1" id="excl-h">عدد محدود من المدارس. تركيز كامل على كل شراكة.</h2>
-    <p class="excl-sub rv d2">نختار شركاءنا بعناية لضمان جودة الخدمة وحصريتها</p>
+    <h2 class="excl-headline" data-aos="fade-up" data-aos-delay="70" id="excl-h">عدد محدود من المدارس. تركيز كامل على كل شراكة.</h2>
+    <p class="excl-sub" data-aos="fade-up" data-aos-delay="150">نختار شركاءنا بعناية لضمان جودة الخدمة وحصريتها</p>
 
     <div class="excl-cards">
 
-      <div class="excl-card rv d2">
+      <div class="excl-card" data-aos="fade-left" data-aos-duration="850">
         <div class="excl-card-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
@@ -1061,7 +1188,7 @@ footer {
         <p>لا يتجاوز عدد المدارس الشريكة عشر مدارس سنوياً</p>
       </div>
 
-      <div class="excl-card rv d3">
+      <div class="excl-card" data-aos="fade-right" data-aos-duration="850">
         <div class="excl-card-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
@@ -1071,7 +1198,7 @@ footer {
         <p>لا نُعلن عن خدماتنا للعموم، التواصل بالدعوة المباشرة</p>
       </div>
 
-      <div class="excl-card rv d4">
+      <div class="excl-card" data-aos="fade-left" data-aos-duration="850">
         <div class="excl-card-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18 7 3.12V11c0 4.52-3.02 8.79-7 10.02C8.02 19.79 5 15.52 5 11V6.3l7-3.12z"/>
@@ -1095,14 +1222,14 @@ footer {
 ══════════════════════════════════════════ -->
 <section id="contact" aria-labelledby="cta-h">
   <div class="wrap" style="max-width:540px;">
-    <h2 class="s-title dark rv d1" id="cta-h">للتواصل والاستفسار</h2>
-    <div class="orn cr rv d2" aria-hidden="true">
+    <h2 class="s-title dark" data-aos="fade-up" data-aos-delay="70" id="cta-h">للتواصل والاستفسار</h2>
+    <div class="orn cr" data-aos="fade-up" data-aos-delay="150" aria-hidden="true">
       <div class="l lr"></div><div class="ds"></div><div class="d"></div><div class="ds"></div><div class="l ll"></div>
     </div>
 
     <div style="text-align:center;">
       <a href="https://wa.me/962795487535"
-         class="wa-btn rv d2"
+         class="wa-btn" data-aos="fade-up" data-aos-delay="150"
          aria-label="تواصل مع مِرْقاة عبر واتساب"
          rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1130,7 +1257,18 @@ footer {
 <!-- ══════════════════════════════════════════
      JAVASCRIPT
 ══════════════════════════════════════════ -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
+/* ── AOS Init ───────────────────────────── */
+if (window.AOS) {
+  AOS.init({
+    once: true,
+    duration: 800,
+    easing: 'ease-out-cubic',
+    offset: 90
+  });
+}
+
 /* ── Gold Particle System ───────────────── */
 (function () {
   const cvs = document.getElementById('hero-canvas');
@@ -1173,15 +1311,6 @@ footer {
   init(); loop();
 })();
 
-/* ── Scroll Reveal ──────────────────────── */
-(function () {
-  const io = new IntersectionObserver(
-    es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }),
-    { threshold: .1, rootMargin: '0px 0px -28px 0px' }
-  );
-  document.querySelectorAll('.rv').forEach(el => io.observe(el));
-})();
-
 /* ── Session Accordion ──────────────────── */
 document.querySelectorAll('.sess-card').forEach(card => {
   card.querySelector('.sess-header').addEventListener('click', function () {
@@ -1205,6 +1334,64 @@ document.querySelectorAll('.acc-header').forEach(header => {
   header.addEventListener('click', toggle);
   header.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
 });
+
+/* ── Navbar Active Section ─────────────────────────── */
+(function () {
+  const nav = document.querySelector('.site-nav');
+  const toggle = document.querySelector('.site-nav-toggle');
+  const links = Array.from(document.querySelectorAll('.site-nav-link'));
+  const ids = links.map(link => link.getAttribute('href')).filter(href => href && href.startsWith('#'));
+  const sections = ids.map(id => document.querySelector(id)).filter(Boolean);
+
+  const setActive = id => {
+    links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${id}`));
+  };
+
+  function updateActiveByScroll() {
+    const navHeight = nav ? nav.offsetHeight : 0;
+    const probeY = window.scrollY + navHeight + 24;
+    let current = sections[0] ? sections[0].id : '';
+    const atPageEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+    if (atPageEnd && sections.length) {
+      setActive(sections[sections.length - 1].id);
+      return;
+    }
+
+    for (const section of sections) {
+      if (probeY >= section.offsetTop) current = section.id;
+      else break;
+    }
+
+    if (current) setActive(current);
+  }
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) setActive(href.slice(1));
+      if (nav && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  window.addEventListener('scroll', updateActiveByScroll, { passive: true });
+  window.addEventListener('resize', updateActiveByScroll);
+  updateActiveByScroll();
+})();
 </script>
 </body>
 </html>
+
+
+
+
