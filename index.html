@@ -1283,11 +1283,10 @@ footer {
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
 /* ── AOS Init ───────────────────────────── */
-const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (window.AOS) {
   AOS.init({
-    disable: isMobileViewport || prefersReducedMotion,
+    disable: prefersReducedMotion,
     once: true,
     duration: 800,
     easing: 'ease-out-cubic',
@@ -1297,7 +1296,7 @@ if (window.AOS) {
 
 /* ── Gold Particle System ───────────────── */
 (function () {
-  if (isMobileViewport || prefersReducedMotion) return;
+  if (prefersReducedMotion) return;
   const cvs = document.getElementById('hero-canvas');
   if (!cvs) return;
   const ctx = cvs.getContext('2d');
