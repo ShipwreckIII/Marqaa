@@ -32,7 +32,10 @@
    RESET
 ═══════════════════════════════════════════════ */
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-html { scroll-behavior:smooth; }
+html {
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+}
 body {
   font-family: var(--f-body);
   background: var(--navy);
@@ -40,7 +43,10 @@ body {
   direction: rtl;
   text-align: right;
   overflow-x: hidden;
+  width:100%;
+  max-width:100%;
   -webkit-font-smoothing: antialiased;
+  touch-action: manipulation;
 }
 
 /* ═══════════════════════════════════════════════
@@ -57,8 +63,11 @@ section { padding:96px 0; scroll-margin-top:var(--nav-h); }
   top:0;
   right:0;
   left:0;
-  z-index:30;
+  z-index:999;
+  -webkit-backdrop-filter:blur(12px);
   backdrop-filter:blur(12px);
+  transform:translateZ(0);
+  backface-visibility:hidden;
   background:linear-gradient(to left,rgba(13,31,60,.92),rgba(13,31,60,.82));
   border-bottom:1px solid rgba(201,168,76,.2);
 }
@@ -201,12 +210,13 @@ section { padding:96px 0; scroll-margin-top:var(--nav-h); }
 ═══════════════════════════════════════════════ */
 #hero {
   position:relative; min-height:100vh;
+  min-height:100svh;
   background:var(--navy);
   display:flex; flex-direction:column;
   align-items:center; justify-content:center;
   overflow:hidden; padding:0;
 }
-#hero-canvas { position:absolute;inset:0;width:100%;height:100%;z-index:0; }
+#hero-canvas { position:absolute;inset:0;width:100%;height:100%;z-index:0; pointer-events:none; }
 .h-grain {
   position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.034;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -637,10 +647,20 @@ footer {
 /* ═══════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════ */
-@media (max-width:768px) {
+@media (max-width:1024px) {
   :root { --nav-h:66px; }
-  section { padding:70px 0; }
-  .wrap { padding:0 1.25rem; }
+  .site-nav {
+    width:100%;
+    left:0;
+    right:0;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+    background:rgba(13,31,60,.96);
+  }
+  .site-nav .wrap {
+    max-width:none;
+    width:100%;
+  }
   .site-nav-inner {
     justify-content:space-between;
     padding:0;
@@ -651,6 +671,7 @@ footer {
     top:calc(var(--nav-h) - 1px);
     right:1.25rem;
     left:1.25rem;
+    max-width:calc(100% - 2.5rem);
     display:none;
     flex-direction:column;
     align-items:stretch;
@@ -669,6 +690,11 @@ footer {
     padding:.45rem .8rem;
     justify-content:flex-start;
   }
+  .excl-cards { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:768px) {
+  section { padding:70px 0; }
+  .wrap { padding:0 1.25rem; }
   .h-logo { font-size:5.5rem; }
   .prob-grid { grid-template-columns:1fr; }
   .prob-card--last { width:100%; justify-self:stretch; }
@@ -679,9 +705,6 @@ footer {
   .sess-sub { font-size:1.3rem; }
   .sess-grade { font-size:1rem; }
   .sess-type { font-size:0.9rem; }
-}
-@media (max-width:1024px) {
-  .excl-cards { grid-template-columns:1fr 1fr; }
 }
 @media (max-width:480px) {
   .excl-cards { grid-template-columns:1fr; }
@@ -1260,8 +1283,11 @@ footer {
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
 /* ── AOS Init ───────────────────────────── */
+const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (window.AOS) {
   AOS.init({
+    disable: isMobileViewport || prefersReducedMotion,
     once: true,
     duration: 800,
     easing: 'ease-out-cubic',
@@ -1271,7 +1297,9 @@ if (window.AOS) {
 
 /* ── Gold Particle System ───────────────── */
 (function () {
+  if (isMobileViewport || prefersReducedMotion) return;
   const cvs = document.getElementById('hero-canvas');
+  if (!cvs) return;
   const ctx = cvs.getContext('2d');
   let W, H, pts = [];
 
@@ -1339,6 +1367,7 @@ document.querySelectorAll('.acc-header').forEach(header => {
 (function () {
   const nav = document.querySelector('.site-nav');
   const toggle = document.querySelector('.site-nav-toggle');
+  const brand = document.querySelector('.site-nav-brand');
   const links = Array.from(document.querySelectorAll('.site-nav-link'));
   const ids = links.map(link => link.getAttribute('href')).filter(href => href && href.startsWith('#'));
   const sections = ids.map(id => document.querySelector(id)).filter(Boolean);
@@ -1366,6 +1395,13 @@ document.querySelectorAll('.acc-header').forEach(header => {
     if (current) setActive(current);
   }
 
+  function closeMenu() {
+    if (nav && nav.classList.contains('open')) {
+      nav.classList.remove('open');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+
   if (toggle && nav) {
     toggle.addEventListener('click', () => {
       const open = nav.classList.toggle('open');
@@ -1373,19 +1409,41 @@ document.querySelectorAll('.acc-header').forEach(header => {
     });
   }
 
+  if (brand) {
+    brand.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setActive('hero');
+      closeMenu();
+    });
+  }
+
   links.forEach(link => {
     link.addEventListener('click', () => {
       const href = link.getAttribute('href');
       if (href && href.startsWith('#')) setActive(href.slice(1));
-      if (nav && nav.classList.contains('open')) {
-        nav.classList.remove('open');
-        if (toggle) toggle.setAttribute('aria-expanded', 'false');
-      }
+      closeMenu();
     });
   });
 
   window.addEventListener('scroll', updateActiveByScroll, { passive: true });
-  window.addEventListener('resize', updateActiveByScroll);
+  window.addEventListener('resize', () => {
+    if (window.matchMedia('(min-width: 769px)').matches) closeMenu();
+    updateActiveByScroll();
+  });
+  window.addEventListener('load', () => {
+    updateActiveByScroll();
+    if (window.AOS) AOS.refresh();
+    window.setTimeout(updateActiveByScroll, 200);
+  });
+
+  if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === 'function') {
+    document.fonts.ready.then(() => {
+      updateActiveByScroll();
+      if (window.AOS) AOS.refresh();
+    });
+  }
+
   updateActiveByScroll();
 })();
 </script>
