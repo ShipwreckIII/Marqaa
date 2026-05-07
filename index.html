@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="مِرْقاة — خدمة استشارية أكاديمية حصرية للمدارس الثانوية المتميزة في الأردن">
   <title>مِرْقاة — استشارات أكاديمية متميزة</title>
+  <link rel="icon" type="image/svg+xml" href="assets/logoLight4.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -26,6 +27,7 @@
   --f-disp:     'Amiri', serif;
   --f-body:     'Tajawal', sans-serif;
   --nav-h:      74px;
+  --hero-logo-w: min(56vw,230px);
 }
 
 /* ═══════════════════════════════════════════════
@@ -79,12 +81,15 @@ section { padding:96px 0; scroll-margin-top:var(--nav-h); }
   gap:1rem;
 }
 .site-nav-brand {
-  color:var(--gold);
-  font-family:var(--f-disp);
-  font-size:1.5rem;
-  letter-spacing:.04em;
+  display:inline-flex;
+  align-items:center;
   text-decoration:none;
   white-space:nowrap;
+}
+.site-nav-logo {
+  display:block;
+  height:52px;
+  width:auto;
 }
 .site-nav-list {
   list-style:none;
@@ -245,12 +250,14 @@ section { padding:96px 0; scroll-margin-top:var(--nav-h); }
   width:5px;height:5px;background:var(--gold);
 }
 .h-logo {
-  font-family:var(--f-disp);
-  font-size:clamp(6rem,18vw,13rem);
-  font-weight:700; color:var(--gold);
-  line-height:1.08; letter-spacing:.04em;
-  white-space:nowrap; width:auto; overflow:visible;
+  width:var(--hero-logo-w);
+  max-width:84vw;
   animation:glow 3.4s ease-in-out infinite;
+}
+.h-logo img {
+  display:block;
+  width:100%;
+  height:auto;
 }
 .h-tag {
   font-family:var(--f-disp);
@@ -695,7 +702,7 @@ footer {
 @media (max-width:768px) {
   section { padding:70px 0; }
   .wrap { padding:0 1.25rem; }
-  .h-logo { font-size:5.5rem; }
+  .h-logo { width:min(66vw,320px); }
   .prob-grid { grid-template-columns:1fr; }
   .prob-card--last { width:100%; justify-self:stretch; }
   .excl-cards { grid-template-columns:1fr; }
@@ -718,7 +725,9 @@ footer {
 <body>
 <nav class="site-nav" aria-label="التنقل بين الأقسام">
   <div class="wrap site-nav-inner">
-    <a href="#hero" class="site-nav-brand" lang="ar">مِرْقاة</a>
+    <a href="#hero" class="site-nav-brand" lang="ar" aria-label="العودة إلى بداية الصفحة">
+      <img src="assets/logoLight4.svg" alt="مِرْقاة" class="site-nav-logo">
+    </a>
     <button class="site-nav-toggle" type="button" aria-label="فتح القائمة" aria-expanded="false" aria-controls="site-nav-list">
       <span aria-hidden="true"></span>
     </button>
@@ -744,9 +753,9 @@ footer {
   <div class="h-glow"  aria-hidden="true"></div>
 
   <div class="h-content">
-    <div class="h-line" aria-hidden="true"></div>
-    <h1 class="h-logo" lang="ar">مِرْقاة</h1>
-    <div class="h-line" aria-hidden="true"></div>
+    <h1 class="h-logo" lang="ar">
+      <img src="assets/logoLight4.svg" alt="شعار مِرْقاة">
+    </h1>
     <p class="h-tag">بوابتك نحو القرار الأكاديمي الصحيح</p>
     <p class="h-sub">خدمة استشارية حصرية للمدارس الثانوية المتميزة في الأردن</p>
   </div>
